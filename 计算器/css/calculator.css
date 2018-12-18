@@ -1,0 +1,20 @@
+#app {
+		width: 300px;
+		margin: 10px auto;
+		border: 5px solid darkgray;
+		padding: 20px;
+	}
+
+	.btn-toolbar {
+		margin: 10px;
+	}
+
+	button {
+		margin-top: 10px;
+		width: 100%;
+	}
+
+	.form-control:focus {
+		/* 覆盖bootstrap的样式 */
+		box-shadow: none;
+	}
