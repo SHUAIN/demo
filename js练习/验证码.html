@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>验证码验证</title>
+		<style type="text/css">
+			body {
+				margin: 0;
+			}
+			
+			.box {
+				width: 700px;
+				margin: 200px auto;
+			}
+			
+			input {
+				height: 30px;
+				width: 100px;
+				border: 0;
+				cursor: pointer;
+				border-radius: 10px;
+				background-color: #499990;
+				color: white;
+			}
+			
+			input:first-child {
+				padding: 0;
+				width: 200px;
+				height: 30px;
+				border: 1px solid darkgray;
+				text-indent: 1em;
+				border-radius: 0;
+				background-color: initial;
+				color: black;
+			}
+			
+			span {
+				display: inline-block;
+				width: 100px;
+				height: 30px;
+				background-color: #aaa;
+				position: relative;
+				top: 1px;
+				text-align: center;
+				line-height: 30px;
+				color: white;
+				font-weight: bolder;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="box">
+			<!--maxlengh 限制最大输入长度-->
+			<input type="text" name="" id="con" placeholder="请输入验证码(不区分大小写)" maxlength="4" />
+			<span></span>
+			<input type="button" name="" id="check" value="验证" />
+			<input type="button" name="" id="load" value="刷新" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		var con = document.getElementById('con');
+		var btn = document.getElementById('check');
+		var span = document.querySelector('span');
+		var load = document.getElementById('load');
+		//		刷新验证
+		load.onclick = function() {
+			show();
+		}
+		//		每次加载生成随机验证码
+		show();
+		btn.onclick = function() {
+			serch();
+		}
+		//		获取输入内容并验证
+		function serch() {
+			var text = con.value.toUpperCase();
+			//			console.log(text);
+			if(text == span.innerHTML) {
+				alert('验证正确');
+				location.reload();
+			} else if(text == 0) {
+				alert('请输入验证码');
+			} else {
+				alert('验证错误');
+			}
+		}
+		//		随机生成四位数验证码到span
+		function show() {
+			//			存储随机的验证码
+			var code = '';
+			//			验证码格式
+			var pw = 4;
+			var random = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+			//		因为只需要四位数验证码 所以小于4
+			for(var i = 0; i < pw; i++) {
+				var item = random[Math.floor(Math.random() * 36)];
+				//			每次随机获取的数字组合起来
+				code = code + item;
+				//				console.log(code);
+			}
+			span.innerHTML = code;
+		}
+	</script>
+
+</html>

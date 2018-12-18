@@ -1,0 +1,95 @@
+/*公共样式*/
+*{ margin:0px; padding: 0px; }/*不用浏览器对不同标签的渲染不同，如何处理*/
+li{ list-style: none; }
+
+/*页面样式*/
+.banner{
+	width:730px;
+	height: 454px;
+	overflow: hidden;
+	margin:50px auto;
+	position: relative;
+}
+/*复习：
+1.宽高设定好盒子大小，overflow才能生效
+2.设定宽和左右margin为auto，使块级盒子居中*/
+/*点的样式*/
+.dian li{
+	display: inline-block;
+	background: #000;
+	width:20px;
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	color:#fff;
+	border-radius:50% ;/*圆角*/
+}
+
+.dian{
+	position: absolute;
+	bottom:20px;
+	left:299px;
+}
+
+/*左右按钮样式*/
+.ban_left{
+	  position: absolute;
+	  top: 200px;
+	  width: 52px;
+	  height: 53px;
+	  overflow: hidden;
+	  border-radius: 50%;
+	  display: none;
+}
+
+.ban_left img{
+	margin-top: -6px;
+  	margin-left: -4px;
+}
+
+.ban_right{
+	width:50px;
+	height: 50px;
+	background: url(../img/you.png) -3px -1px;
+	position: absolute;
+	top: 200px;
+	right:0px;
+	border-radius: 50%;
+	display: none;
+}
+
+.banner:hover .ban_left,.banner:hover .ban_right{ display: block; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

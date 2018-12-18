@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>日历</title>
+		<style type="text/css">
+			body,
+			ul {
+				margin: 0;
+			}
+			
+			.box {
+				width: 350px;
+				margin: 100px auto;
+				font-family: "微软雅黑";
+			}
+			
+			.top {
+				width: 100%;
+				height: 100px;
+				background-color: #1abc9c;
+				text-align: center;
+				font-size: 13px;
+				color: white;
+				box-sizing: border-box;
+				padding-top: 30px;
+			}
+			
+			ul {
+				width: 350px;
+				padding-left: 0;
+				background-color: #eee;
+				/*通过设置父级元素字体为0的方式来消除因为html代码换行导致的间距*/
+				font-size: 0;
+			}
+			
+			ul>li {
+				text-align: center;
+				display: inline-block;
+				width: 50px;
+				margin-bottom: 10px;
+				font-size: 8px;
+				color: #A09C9C;
+			}
+			
+			.week {
+				background-color: #ddd;
+				color: #5D5B5B;
+				top: 0;
+				height: 20px;
+				line-height: 20px;
+				font-size: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+	</body>
+	<script type="text/javascript">
+		document.write('<div class=box>');
+		document.write('<div class=top>');
+		document.write('November');
+		document.write('<br/>2018')
+		document.write('</div>');
+		document.write('<ul>');
+		for(var i = 1; i <= 7; i++) {
+			document.write('<li class=week>');
+			switch(i) {
+				case 7:
+					document.write('Su');
+					break;
+				case 6:
+					document.write('Sa');
+					break;
+				case 5:
+					document.write('Fr');
+					break;
+				case 4:
+					document.write('Th');
+					break;
+				case 3:
+					document.write('We');
+					break;
+				case 2:
+					document.write('Tu');
+					break;
+				case 1:
+					document.write('Mo');
+					break;
+				default:
+					break;
+			}
+			document.write('</li>');
+		}
+		for(var i = 1; i <= 30; i++) {
+			document.write('<li>');
+			document.write(i);
+			document.write('</li>');
+		}
+		document.write('</ul>');
+		document.write('</div>');
+	</script>
+
+</html>
