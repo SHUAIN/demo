@@ -33,7 +33,7 @@
         // 创建一个链表
         function LinkedList() {
             // 保存每一项(每一个节点)
-            let Node = function (element) {
+            var Node = function (element) {
                 // 存储元素
                 this.element = element;
                 // 存储下一项的引用
@@ -45,8 +45,8 @@
             head = null;
             // 链表尾部插入元素
             this.append = function (element) {
-                // current保存当前项的引用
-                let node = new Node(element),
+                // current保存当前项 current.next为下一项
+                var node = new Node(element),
                     current;
                 // 链表为空时，存储到第一项
                 if (head == null) {
@@ -64,10 +64,33 @@
             };
             // 链表特定位置插入元素
             this.insert = function (position, element) {
-                
+
             };
             // 从特点位置移除某一项
-            this.removeAt = function (position) {};
+            this.removeAt = function (position) {
+                var current = head,
+                    previous, //保存前一项
+                    index = 0; //控制循环
+                // 检查是否越界
+                if (position > -1 && position < length) {
+                    // 移除第一项
+                    if (position === 0) {
+                        head = current.next;
+                    } else {
+                        // 移除其他项
+
+                        while (index++ < position) { //遍历所有项
+                            previous = current;
+                            current = current.next;
+                        };
+                        previous.next = current.next;
+                    };
+                    length--;
+                    return current.length;
+                } else {
+                    return null;
+                };
+            };
             // 移除某一项
             this.remove = function (element) {};
             // 返回元素在链表中的位置 没有返回-1
