@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于map</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            // 对象的键只能string类型
+            name: 'object'
+        };
+        console.log(`obj.name=${obj['name']}`);
+        console.log(obj);
+        /**map接受数组作为参数*/
+        let map = new Map([
+            // map的键可以是任何数据类型
+            [132, 'map']
+        ]);
+        console.warn('通过get获取某键对应的值' + "map.get(132)");
+        console.log(`map.get=${map.get(132)}`);
+        console.log(map);
+        console.warn('通过delete删除某键' + "map.delete(132);");
+        map.delete(132);
+        console.log(map);
+        console.warn('通过has判断是否含有该键' + "map.has(132)");
+        console.log(map.has(132));
+        console.warn('通过set设置键值对' + ' map.set("a", 5);');
+        map.set('a', 5);
+        console.log(map);
+        console.warn('map可以采用链式写法,因为set方法返回的是当前map对象');
+        map.set('b', 'b')
+            .set('c', 'c');
+        console.log(map);
+        console.warn('遍历器函数');
+        console.warn('通过keys返回所有键' + "map.keys()");
+        console.log(map.keys());
+        console.warn('通过values返回所有值' + "map.values()");
+        console.log(map.values());
+        console.warn('通过entries返回所有成员' + "map.entries()");
+        console.log(map.entries());
+        console.warn('通过clear清除所有成员' + "map.clear");
+        map.clear();
+        console.log(map);
+    </script>
+</body>
+
+</html>
