@@ -64,7 +64,29 @@
             };
             // 链表特定位置插入元素
             this.insert = function (position, element) {
-
+                if (position >= 0 && position <= length) {
+                    var node = new Node(element),
+                        current = head,
+                        previous,
+                        index = 0;
+                    // 在第一个位置插入
+                    if (position === 0) {
+                        node.next = current;
+                        head = node;
+                    } else {
+                        while (index++ < position) {
+                            previous = current;
+                            current = current.next;
+                        };
+                        node.next = current;
+                        previous.next = node;
+                    };
+                    // 更新链表长度
+                    length++;
+                    return true;
+                } else {
+                    return false;
+                };
             };
             // 从特点位置移除某一项
             this.removeAt = function (position) {
@@ -78,31 +100,72 @@
                         head = current.next;
                     } else {
                         // 移除其他项
-
                         while (index++ < position) { //遍历所有项
                             previous = current;
                             current = current.next;
                         };
                         previous.next = current.next;
                     };
+                    // 更新链表长度
                     length--;
-                    return current.length;
+                    // 返回移除的元素
+                    return current.element;
                 } else {
                     return null;
                 };
             };
             // 移除某一项
-            this.remove = function (element) {};
+            this.remove = function (element) {
+                var index = this.indexOf(element);
+                return this.removeAt(index);
+            };
             // 返回元素在链表中的位置 没有返回-1
-            this.indexOf = function (element) {};
+            this.indexOf = function (element) {
+                var current = head,
+                    index = 0;
+                while (current) {
+                    if (element === current.element) {
+                        return index;
+                    };
+                    index++;
+                    current = current.next;
+                };
+                return -1;
+            };
             // 判断链表是否为空 时返回true 否返回false
-            this.isEmpty = function () {};
+            this.isEmpty = function () {
+                return length === 0;
+            };
             // 返回链表元素长度
-            this.size = function () {};
+            this.size = function () {
+                return length;
+            };
             // 让列表只输出元素，不输出引用位置
-            this.toString = function () {};
-            this.print = function () {};
+            this.toString = function () {
+                var current = head,
+                    string = '';
+                while (current) {
+                    string = current.element;
+                    current = current.next;
+                };
+                return string;
+            };
+            this.getHead=function(){
+                return head;
+            };
         };
+
+        let one=new LinkedList();
+        one.append(5);
+        one.append(50);
+        one.append(59);
+        one.append(59);
+        one.append(99);
+        one.append(150);
+        console.log(one.removeAt(0));
+        console.log(one.getHead());
+
+
     </script>
 </body>
 
