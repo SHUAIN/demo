@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 函数的参数一直都是值的传递
+        // 函数内部可以通过arguments来访问参数
+        function sayHi(arg1,arg2){
+            console.log(`arguments[0]=${arguments[0]}`);
+            console.log(`arg1=${arg1}`);
+            arg1=100;
+            console.log(`arguments[0]=${arguments[0]}`);
+            console.log(`arg1=${arg1}`);
+        };
+        sayHi(20,50);
+    </script>
+
+</body>
+
+</html>
