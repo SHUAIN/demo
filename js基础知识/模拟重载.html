@@ -13,6 +13,9 @@
         let calculate = {
             // arguments版本
             add_arguments() {
+                // 可以通过扩展运算符把该对象转换成数组  [...arguments]
+                console.log(`arg是数组吗:${[...arguments] instanceof Array}`);
+
                 console.log(`arg是数组吗:${arguments instanceof Array}`);
                 let argCount = arguments.length;
                 let sum = 0;
@@ -55,7 +58,7 @@
             }
         };
         // 求和，并返回计算结果
-        calculate.add_rest(0);
+        // calculate.add_rest(0);
         calculate.add_arguments(1, 1, 100);
     </script>
 
