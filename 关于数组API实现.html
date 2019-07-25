@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动手实现数组api</title>
+    <style>
+        .left,
+        .right {
+            float: left;
+        }
+
+        .left {
+            background-color: antiquewhite;
+            margin-right: 20px;
+        }
+
+        .right {
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<div class="left">
+    <h2>改变原数组的api</h2>
+    <ol>
+        <li>
+            <h3>arrPush</h3>
+            <p>向数组末尾添加一个或多个元素，并返回新的长度</p>
+        </li>
+        <li>
+            <h3>arrPop</h3>
+            <p>删除数组的最后一个元素，并返回删除的元素</p>
+        </li>
+        <li>
+            <h3>arrUnShift</h3>
+            <p>向数组的开头添加一个或更多元素，并返回新的长度</p>
+        </li>
+        <li>
+            <h3>arrShift</h3>
+            <p>删除并返回数组的第一个元素</p>
+        </li>
+        <li>
+            <h3>arrIndexOf</h3>
+            <p>搜索数组中的元素，并返回它所在的位置。</p>
+        </li>
+        <li>
+            <h3>arrLastIndexOf</h3>
+            <p>搜索数组中的元素，并返回它最后出现的位置</p>
+        </li>
+        <li>
+            <h3>arrReverse</h3>
+            <p>反转数组的元素顺序,返回颠倒顺序后的数组</p>
+        </li>
+        <li>
+            <h3>arrSolice</h3>
+            <p></p>
+        </li>
+        <li>
+            <h3>arrSort</h3>
+            <p></p>
+        </li>
+        <li>
+            <h3>arrCopyWithin</h3>
+            <p></p>
+        </li>
+    </ol>
+</div>
+<div class="right">
+    <h2>不改变原数组的api</h2>
+    <ol>
+        <li>
+            <h3>arrSlice</h3>
+            <p>选取数组的的一部分，并返回一个新数组。</p>
+        </li>
+        <li>
+            <h3></h3>
+            <p></p>
+        </li>
+        <li>
+            <h3></h3>
+            <p></p>
+        </li>
+        <li>
+            <h3></h3>
+            <p></p>
+        </li>
+        <li>
+            <h3></h3>
+            <p></p>
+        </li>
+    </ol>
+</div>
+
+<body>
+    <script>
+        function Arr() {
+            let arr = [];
+            this.arrPush = (...rest) => {
+                for (let i = arr.length; i < rest.length; i++) {
+                    arr[i] = rest[i];
+                };
+                return arr.length;
+            };
+            this.arrPop = () => {
+                return arr.length - 1;
+            };
+            this.arrUnShift = (...rest) => {
+                // 旧数组个数
+                let length = arr.length;
+                // 旧数组长度
+                let oldLength = length;
+                // 旧数组的索引
+                let index = 0;
+                // 新数组长度
+                let newLength = arr.length + rest.length;
+                for (let i = newLength - 1; i >= 0; i--) {
+                    if (i > oldLength) {
+                        // 将原来数组的元素移到最后
+                        arr[i] = arr[--length];
+                    } else {
+                        // 将新添加的元素添加到数组开始
+                        arr[i] = rest[i];
+                    }
+
+                };
+                return arr.length;
+            };
+            this.arrShift = () => {
+                let res = arr[0];
+                for (let i in arr) {
+                    arr[i] = arr[i + 1]
+                };
+                return res;
+            };
+            this.arrIndexOf = (item) => {
+                let index = 0;
+                for (let i in arr) {
+                    if (arr[i] == item) {
+                        index = i;
+                        break;
+                    }
+                };
+                return index;
+            };
+            this.arrLastIndexOf = (item) => {
+                let index;
+                for (let i in arr) {
+                    if (arr[i] == item) {
+                        index = i;
+                    }
+                };
+                return index;
+            };
+            this.arrReverse = () => {
+                let brr = [];
+                let index = 0;
+                for (let i = arr.length - 1; i >= 0; i--) {
+                    brr[index++] = arr[i];
+                };
+                arr = brr;
+                return brr;
+            };
+            this.arrSlice = (...rest) => {
+                let length = rest.length;
+                let brr = [];
+                switch (length) {
+                    case 0:
+                        // 没有参数的时候直接返回原数组
+                        brr = arr;
+                        break;
+                    case 1:
+                        // 一个参数的时候，返回该参数位置以及之后的所有元素
+                        for (let i = 0; i < arr.length - rest[0]; i++) {
+                            brr[i] = arr[i + rest[0]];
+                        };
+                        break;
+                    case 2:
+                        // 第一个参数是起始位置，第二个参数是结束位置(不包含该位置)
+                        // arr[1]~arr[2];
+                        let newLength=rest[1]-rest[0];
+                        let index=rest[0];
+                        for(let i=0;i<newLength;i++){
+                            brr[i]=arr[index++]
+                        };
+                        break;
+
+                    default:
+                        console.error('参考array.slice(start, end)');
+                        break;
+                };
+                return brr;
+            };
+            // 打印数组内容
+            this.printAll = () => {
+                console.log(arr);
+            };
+        };
+        let a = new Arr();
+        a.arrPush(5, 6, 7, 8, 9);
+        a.printAll();
+        let res = a.arrSlice(1,3);
+        console.log(res);
+    </script>
+</body>
+
+</html>
