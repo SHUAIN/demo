@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 这里用箭头函数的话this指向的是window
+        Array.prototype.myPush = function (...rest) {
+            for (let i = this.length; i < rest.length; i++) {
+                this[i] = rest[i];
+            };
+            return this.length;
+            console.log(this);
+        };
+        let com = function (v1, v2) {
+            if (v1<v2) {
+                return 1;
+            } else if (v1>v2) {
+                return -1
+            } else {
+                return 0;
+            };
+        };
+        let a = [4, 10, 5];
+        a.sort(com);
+        console.log(a);
+    </script>
+</body>
+
+</html>

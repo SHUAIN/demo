@@ -54,12 +54,8 @@
             <p>反转数组的元素顺序,返回颠倒顺序后的数组</p>
         </li>
         <li>
-            <h3>arrSolice</h3>
-            <p></p>
-        </li>
-        <li>
             <h3>arrSort</h3>
-            <p></p>
+            <p>对数组的元素进行排序,是在原数组基础上继续排序的</p>
         </li>
         <li>
             <h3>arrCopyWithin</h3>
@@ -179,10 +175,10 @@
                     case 2:
                         // 第一个参数是起始位置，第二个参数是结束位置(不包含该位置)
                         // arr[1]~arr[2];
-                        let newLength=rest[1]-rest[0];
-                        let index=rest[0];
-                        for(let i=0;i<newLength;i++){
-                            brr[i]=arr[index++]
+                        let newLength = rest[1] - rest[0];
+                        let index = rest[0];
+                        for (let i = 0; i < newLength; i++) {
+                            brr[i] = arr[index++]
                         };
                         break;
 
@@ -192,16 +188,74 @@
                 };
                 return brr;
             };
+            this.arrSort = (...rest) => {
+                console.log(typeof rest[0]);
+                if (typeof rest[0] === 'function') {
+                    let length = rest.length;
+                    switch (length) {
+                        case 0:
+                            this.arrToString();
+                            let tmp;
+                            for (let i = 0; i < arr.length; i++) {
+                                for (let j = i; j < arr.length; j++) {
+                                    if (arr[i] > arr[j]) {
+                                        tmp = arr[i];
+                                        arr[i] = arr[j];
+                                        arr[j] = tmp;
+                                    };
+                                };
+                            };
+                            this.arrParseInt();
+                            break;
+                        case 1:
+                            let tmps;
+                            // let res = rest[0]();
+                            for (let i = 0; i < arr.length; i++) {
+                                for (let j = i; j < arr.length; j++) {
+                                    if (arr[i] < arr[j]) {
+                                        tmps = arr[i];
+                                        arr[i] = arr[j];
+                                        arr[j] = tmps;
+                                    };
+                                };
+                            };
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    console.error('按sort规则');
+                };
+
+            };
+            this.arrToString = () => {
+                for (let i = 0; i < arr.length; i++) {
+                    arr[i] = arr[i].toString();
+                };
+            };
+            this.arrParseInt = () => {
+                for (let i = 0; i < arr.length; i++) {
+                    arr[i] = parseInt(arr[i]);
+                };
+            };
             // 打印数组内容
             this.printAll = () => {
                 console.log(arr);
             };
         };
+        let com = function (v1, v2) {
+            if (v1 < v2) {
+                return 1;
+            } else if (v1 > v2) {
+                return -1
+            } else {
+                return 0;
+            };
+        };
         let a = new Arr();
-        a.arrPush(5, 6, 7, 8, 9);
+        a.arrPush(4, 10, 5);
+        a.arrSort(com);
         a.printAll();
-        let res = a.arrSlice(1,3);
-        console.log(res);
     </script>
 </body>
 
