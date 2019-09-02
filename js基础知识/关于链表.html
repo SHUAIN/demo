@@ -5,167 +5,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>链表</title>
-    <style>
-    </style>
+    <title>关于链表</title>
 </head>
 
 <body>
+    <h1>概念</h1>
     <ul>
-        <li>
-            <h1>什么是链表？</h1>
-            <h3>链表是存储有序的元素集合，不同于数组，链表的每个元素存储一个要存储的元素本身，和一个指向下一个元素的引用</h3>
-        </li>
-        <li>
-            <h1>链表对比数组的优势</h1>
-            <h3>当在数组中起始或者中间插入元素时,需要移动之后的所有元素,代价过高;链表不需要移动其他元素</h3>
-        </li>
-        <li>
-            <h1>链表对比数组的劣势</h1>
-            <h3>1.数组可以直接访问数组元素,链表需要从头开始查询直到找到为止;2.因为链表的每个元素都存储了下一个元素的引用(指针)，操作需要额外注意</h3>
-        </li>
-        <li>
-            <h1>实现一个链表</h1>
-            <h3>打开控制台</h3>
-        </li>
+        <li>1.类似于数组一样存储多个数据的数据结构</li>
+        <li>2.链表中每个元素称为节点，每个节点包含元素内容和指向下一个节点的指针</li>
+    </ul>
+    <h1>链表的优点</h1>
+    <ul>
+        <li>1.内存空间不是必须连续的。可以实现灵活的内存管理</li>
+        <li>2.链表不必再创建时就确定大小，并且大小可以无限延伸下去</li>
+        <li>3.链表再插入和删除数据时，时间复杂度低，效率高</li>
+    </ul>
+    <h1>链表的缺点</h1>
+    <ul>
+        <li>1.访问任何一个位置的元素时，都需要从头开始访问(无法跳过第一或任何一个元素)</li>
+        <li>2.无法通过下标直接访问元素</li>
+    </ul>
+    <h1>数组的优点</h1>
+    <ul>
+        <li>1.占用内存空间少</li>
+        <li>2.数组内的数据可以随机访问</li>
+        <li>3.数据查找效率较高（内存连续）</li>
+    </ul>
+    <h1>数组的缺点</h1>
+    <ul>
+        <li>1.插入和删除效率低，因为要移动操作元素之后的所有元素</li>
+        <li>2.数组大小固定，不能动态拓展(大多数语言是这样js的是动态的)</li>
     </ul>
     <script>
-        // 创建一个链表
+        // 封装链表类
         function LinkedList() {
-            // 保存每一项(每一个节点)
-            var Node = function (element) {
-                // 存储元素
-                this.element = element;
-                // 存储下一项的引用
+            // 节点类 链表中每个节点包含元素内容和指向下一个节点的引用
+            function Node(data) {
+                this.data = data;
                 this.next = null;
             };
-            // 保存链表长度
-            length = 0;
-            // 存储第一个节点
-            head = null;
-            // 链表尾部插入元素
-            this.append = function (element) {
-                // current保存当前项 current.next为下一项
-                var node = new Node(element),
-                    current;
-                // 链表为空时，存储到第一项
-                if (head == null) {
-                    head = node;
+            // 第一个节点的引用
+            this.head = null;
+            // 链表长度属性
+            this.length = 0;
+            // append追加元素方法
+            LinkedList.prototype.append = function (data) {
+                // 1.创建新节点
+                let node = new Node(data);
+                // 2.判断是否是第一个节点  也可以根据heae是否为空判断
+                if (this.length === 0) {
+                    this.head = node;
                 } else {
-                    // 不为空的时候，遍历到最后一项，存储
-                    current = head;
+                    // 当前第一个节点
+                    let current = this.head;
+                    // 通过判断每个节点的next是否为空来找到最后一个元素 
                     while (current.next) {
                         current = current.next;
                     };
+                    // 然后给将最后一个元素的next指向我们新添加的元素
                     current.next = node;
-                };
-                // 更新链表长度
-                length++;
+                }
+                // 3.更新长度
+                this.length++;
             };
-            // 链表特定位置插入元素
-            this.insert = function (position, element) {
-                if (position >= 0 && position <= length) {
-                    var node = new Node(element),
-                        current = head,
-                        previous,
-                        index = 0;
-                    // 在第一个位置插入
+            // tostring打印元素内容方法
+            LinkedList.prototype.toString = function () {
+                // 1.定义起始变量
+                let current = this.head;
+                // 2.定义要打印变量
+                let listString = "";
+                // 循环每一个节点
+                while (current) {
+                    // 获取当前节点data
+                    listString += current.data + " ";
+                    // 切换到下一个节点
+                    current = current.next;
+                };
+                return listString;
+            };
+            // insert向特定位置插入方法  position计数规则和数组下标一直 0为第一个
+            LinkedList.prototype.insert = function (position, data) {
+                // 1.对position做越界判断  即插入位置是否存在
+                if (position >= 0 && position <= this.length) {
+                    let node = new Node(data);
+                    // 2.插入位置是第一个时
                     if (position === 0) {
-                        node.next = current;
-                        head = node;
+                        // 让要插入的节点的指针指向原来的第一个节点
+                        node.next = this.head;
+                        // 让head指向要插入的节点
+                        this.head = node;
                     } else {
+                        // 标识每一个节点的位置  previous保存前一个节点 
+                        let index = 0,
+                            current = this.head,
+                            previous;
                         while (index++ < position) {
+                            // 这里是指针 所以current指向对象变化后 previous也会变
                             previous = current;
                             current = current.next;
                         };
                         node.next = current;
                         previous.next = node;
                     };
-                    // 更新链表长度
-                    length++;
+                    // 更新长度
+                    this.length++;
                     return true;
                 } else {
                     return false;
-                };
+                }
             };
-            // 从特点位置移除某一项
-            this.removeAt = function (position) {
-                var current = head,
-                    previous, //保存前一项
-                    index = 0; //控制循环
-                // 检查是否越界
-                if (position > -1 && position < length) {
-                    // 移除第一项
+            // get方法 提供position返回链表中该位置的data
+            LinkedList.prototype.get = function (position) {
+                // 判断position越界
+                if (position >= 0 && position <= this.length) {
+                    let index, current = this.head;
+                    while (index++ < position) {
+                        current = current.next;
+                    };
+                    return current.data;
+                } else {
+                    return 0;
+                }
+            };
+            // indexof方法 提供data 返回该元素在链表中的索引(index) 没有时 返回负一
+            LinkedList.prototype.indexOf = function (data) {
+                let index = 0,
+                    current = this.head;
+                while (current) {
+                    if (current.data == data) {
+                        return index;
+                    }
+                    current = current.next;
+                    index++;
+                };
+                return -1;
+            };
+            // update方法 修改某个位置的元素
+            LinkedList.prototype.update = function (position, data) {
+                // 越界判断
+                if (position >= 0 && position <= this.length) {
+                    let index = 0,
+                        current = this.head;
+                    while (index++ < position) {
+                        // 这里是指针 所以current指向对象变化后 previous也会变
+                        current = current.next;
+                    };
+                    current.data = data;
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+            // removeAt方法 删除特定位置的元素 返回删除的元素
+            LinkedList.prototype.removeAt = function (position) {
+                // 越界判断
+                if (position >= 0 && position <= this.length) {
+                    let index = 0,
+                        current = this.head,
+                        previous;
                     if (position === 0) {
-                        head = current.next;
+                        this.head = current.next;
                     } else {
-                        // 移除其他项
-                        while (index++ < position) { //遍历所有项
+                        while (index++ < position) {
                             previous = current;
                             current = current.next;
                         };
                         previous.next = current.next;
-                    };
-                    // 更新链表长度
-                    length--;
-                    // 返回移除的元素
-                    return current.element;
+                    }
+                    // 更新长度
+                    this.length--;
+                    return current.data;
                 } else {
                     return null;
-                };
+                }
             };
-            // 移除某一项
-            this.remove = function (element) {
-                var index = this.indexOf(element);
-                return this.removeAt(index);
+            // remove方法  根据data移除链表中的一项
+            LinkedList.prototype.remove = function (data) {
+                let position = this.indexOf(data);
+                return this.removeAt(position);
             };
-            // 返回元素在链表中的位置 没有返回-1
-            this.indexOf = function (element) {
-                var current = head,
-                    index = 0;
-                while (current) {
-                    if (element === current.element) {
-                        return index;
-                    };
-                    index++;
-                    current = current.next;
-                };
-                return -1;
+            // size方法 返回链表对的元素个数
+            LinkedList.prototype.size = function () {
+                return this.length;
             };
-            // 判断链表是否为空 时返回true 否返回false
-            this.isEmpty = function () {
-                return length === 0;
+            // isEmpty方法 判断链表是否为空
+            LinkedList.prototype.isEmpty = function () {
+                if (this.length === 0) {
+                    return true;
+                } else {
+                    return false;
+                }
             };
-            // 返回链表元素长度
-            this.size = function () {
-                return length;
-            };
-            // 让列表只输出元素，不输出引用位置
-            this.toString = function () {
-                var current = head,
-                    string = '';
-                while (current) {
-                    string = current.element;
-                    current = current.next;
-                };
-                return string;
-            };
-            this.getHead=function(){
-                return head;
-            };
+
         };
-
-        let one=new LinkedList();
-        one.append(5);
-        one.append(50);
-        one.append(59);
-        one.append(59);
-        one.append(99);
-        one.append(150);
-        console.log(one.removeAt(0));
-        console.log(one.getHead());
-
-
+        // 测试代码
+        let ll = new LinkedList();
+        ll.append('a');
+        ll.append('b');
+        ll.append('c');
+        ll.insert(1, 'one');
+        ll.insert(2, 'two');
+        console.log(ll.toString());
+        // console.log(ll);
+        // console.log(ll.get(0));
+        // console.log(ll.indexOf('aasd'));
+        console.log(ll.update(0, "update"));
+        // ll.removeAt(0);
+        ll.remove('update');
+        console.log(ll);
     </script>
 </body>
 
