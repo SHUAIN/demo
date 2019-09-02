@@ -9,36 +9,48 @@
 </head>
 
 <body>
-    
+    <h1>队列</h1>
+    <ul>
+        <li>队列是单向操作，先进先出</li>
+    </ul>
+    <h1>应用</h1>
+    <ul>
+        <li>1.打印队列，多份文档按传递进去的顺序打印</li>
+        <li>2.线程队列</li>
+    </ul>
     <script>
         /**
             队列是单向操作，而且是先进先出，所以在队尾进行添加元素，队头移除元素。
             用数组来理解就是，从数组尾部添加，数组头部删除
             这样才能做大先进先出。
         */
-        class Queue{
-            item=[];
+        class Queue {
+            item = [];
             // 给队列队尾添加元素
-            enqueue(val){
+            enqueue(val) {
                 return this.item.push(val);
             };
             // 给队列队头删除元素
-            dequeue(val){
+            dequeue(val) {
                 return this.item.shift(val);
             };
             // 返回队列第一个元素
-            front(val){
+            front(val) {
                 return this.item[0];
             };
             // 判断队列中是否含有元素
-            isEmpty(val){
+            isEmpty(val) {
                 return this.item.length;
             };
             // 判断队列的元素个数
-            size(){
+            size() {
                 return this.item.length;
             };
         };
+        // 测试代码
+        let q=new Queue();
+        q.enqueue('a');
+        console.log(q);
     </script>
 </body>
 
