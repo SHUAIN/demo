@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>集合结构</title>
+</head>
+
+<body>
+    <h1>集合概念</h1>
+    <ul>
+        <li>1.通常是由一组无序的，且不能重复的元素构成</li>
+        <li>2.可以理解成一种特殊的数组
+            <ol>
+                <li>特殊在里面的元素没有顺序，不能重复</li>
+                <li>没有顺序意味着不能通过下标访问，不能重复意味着相同对象在集合中只存一份</li>
+            </ol>
+        </li>
+    </ul>
+    <h1>ES6的set结构就是一个集合</h1>
+    <h1>集合比较常见的实现方式是哈希表</h1>
+    <h1>封装集合基本操作</h1>
+    <ol>
+        <li>add(value)向集合添加一个新的项</li>
+        <li>remove(vlaue)移除集合的一项</li>
+        <li>has(value)判断集合有无指定的一项?返回true:返回false</li>
+        <li>clear()移除集合所有项</li>
+        <li>size()返回集合包含项的个数</li>
+        <li>values()返回一个包含集合所有值的数组</li>
+    </ol>
+
+    <script>
+        // 封装集合类
+        function SetCustomer() {
+            // 属性
+            this.items = {};
+            // 方法
+            SetCustomer.prototype.add = function (value) {
+                this.items[value] = value;
+            };
+            SetCustomer.prototype.remove = function (value) {
+                for (let i in this.items) {
+                    if (value == i) {
+                        delete this.items[i]
+                    }
+                };
+            };
+            SetCustomer.prototype.has = function (value) {
+                /**第一种*/
+                    // for (let i in this.items) {
+                    //     if (value == i) {
+                    //         return true;
+                    //     }
+                    // };
+                    // return false;
+                /*第二种*/
+                    if (this.items.hasOwnProperty(value)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+            };
+            SetCustomer.prototype.clear=function(){
+                this.items={};
+            };
+            SetCustomer.prototype.size=function(){
+                let index=0;
+                for(let i in this.items){
+                    index++;
+                };
+                return index;
+            };
+            SetCustomer.prototype.values=function(){
+                let data=[];
+                for(let i in this.items){
+                    data.push(this.items[i]);
+                };
+                return data;
+            };
+        };
+
+        // 测试代码
+        let demo = new SetCustomer();
+        demo.add(1);
+        demo.add(2);
+        console.log(demo.size());
+        console.log(demo.values());
+    </script>
+</body>
+
+</html>
