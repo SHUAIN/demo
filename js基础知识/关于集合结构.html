@@ -41,40 +41,41 @@
                 this.items[value] = value;
             };
             SetCustomer.prototype.remove = function (value) {
-                for (let i in this.items) {
-                    if (value == i) {
-                        delete this.items[i]
-                    }
-                };
+                if (this.has(value)) {
+                    delete this.items[value];
+                    return true;
+                } else {
+                    return false;
+                }
             };
             SetCustomer.prototype.has = function (value) {
                 /**第一种*/
-                    // for (let i in this.items) {
-                    //     if (value == i) {
-                    //         return true;
-                    //     }
-                    // };
-                    // return false;
+                // for (let i in this.items) {
+                //     if (value == i) {
+                //         return true;
+                //     }
+                // };
+                // return false;
                 /*第二种*/
-                    if (this.items.hasOwnProperty(value)) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                if (this.items.hasOwnProperty(value)) {
+                    return true;
+                } else {
+                    return false;
+                }
             };
-            SetCustomer.prototype.clear=function(){
-                this.items={};
+            SetCustomer.prototype.clear = function () {
+                this.items = {};
             };
-            SetCustomer.prototype.size=function(){
-                let index=0;
-                for(let i in this.items){
+            SetCustomer.prototype.size = function () {
+                let index = 0;
+                for (let i in this.items) {
                     index++;
                 };
                 return index;
             };
-            SetCustomer.prototype.values=function(){
-                let data=[];
-                for(let i in this.items){
+            SetCustomer.prototype.values = function () {
+                let data = [];
+                for (let i in this.items) {
                     data.push(this.items[i]);
                 };
                 return data;
