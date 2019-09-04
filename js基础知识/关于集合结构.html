@@ -30,7 +30,32 @@
         <li>size()返回集合包含项的个数</li>
         <li>values()返回一个包含集合所有值的数组</li>
     </ol>
-
+    <h1>集合间的常见操作</h1>
+    <ol>
+        <li>并集：对于给定的2个集合，返回一个包含两个集合中 <span class="hint">所有的</span> 元素的新集合</li>
+        <li>交集：对于给定的2个集合，返回一个包含两个集合中 <span class="hint">共有的</span> 元素的新集合</li>
+        <li>差集：对于给定的2个集合，返回一个包含所有存在A但不存在B集合的所有元素的新集合</li>
+        <li>子集：验证一个集合是否是另一个集合的子集</li>
+    </ol>
+    <h3>并集的代码实现</h3>
+    <ol>
+        <li>创建一个新集合代表AB集合的并集</li>
+        <li>获取A集合的所有值，并添加到这个新集合中</li>
+        <li>对B集合做和A集合同样的操作</li>
+        <li>返回新集合</li>
+    </ol>
+    <h3>交集的代码实现</h3>
+    <ol>
+        <li>创建一个新集合代表AB集合的交集</li>
+        <li>遍历A集合所有元素时判断每个元素是否也被B集合包含?添加到新集合:跳过</li>
+        <li>返回新集合</li>
+    </ol>
+    <h3>差集的代码实现</h3>
+    <ol>
+        <li>创建一个新集合代表AB集合的交集</li>
+        <li>遍历A集合所有元素时判断每个元素是否也被B集合包含?跳过:添加到新集合</li>
+        <li>返回新集合</li>
+    </ol>
     <script>
         // 封装集合类
         function SetCustomer() {
@@ -67,27 +92,83 @@
                 this.items = {};
             };
             SetCustomer.prototype.size = function () {
-                let index = 0;
-                for (let i in this.items) {
-                    index++;
-                };
-                return index;
+                // let index = 0;
+                // for (let i in this.items) {
+                //     index++;
+                // };
+                // return index;
+                return Object.keys(this.items).length;
             };
             SetCustomer.prototype.values = function () {
-                let data = [];
-                for (let i in this.items) {
-                    data.push(this.items[i]);
+                // let data = [];
+                // for (let i in this.items) {
+                //     data.push(this.items[i]);
+                // };
+                // 以为集合键值一致的 所以取键也行
+                return Object.keys(this.items);
+            };
+            // 封装并集操作 提供另一个集合 和当前集合求并集
+            SetCustomer.prototype.union = function (otherSet) {
+                // 1.创建新集合
+                let unionSet = new SetCustomer();
+                // 2.将A集合元素添加到新集合
+                for (let i = 0; i < this.size(); i++) {
+                    unionSet.add(this.values()[i]);
                 };
-                return data;
+                // 3.将B集合添加到新集合
+                for (let i = 0; i < otherSet.size(); i++) {
+                    unionSet.add(otherSet.values()[i]);
+                };
+                return unionSet;
+            };
+            // 封装交集操作 提供另一个集合 和当前集合求交集
+            SetCustomer.prototype.intersection = function (otherSet) {
+                let insSet = new SetCustomer();
+                for (let i = 0; i < this.size(); i++) {
+                    if (otherSet.has(this.values()[i])) {
+                        insSet.add(this.values()[i]);
+                    }
+                };
+                return insSet;
+            };
+            // 封装差集操作
+            SetCustomer.prototype.difference = function (otherSet) {
+                let diffSet = new SetCustomer();
+                for (let i = 0; i < this.size(); i++) {
+                    if (!otherSet.has(this.values()[i])) {
+                        diffSet.add(this.values()[i]);
+                    }
+                };
+                return diffSet;
+            };
+            // 求证本集合是不是另一个集合的子集
+            SetCustomer.prototype.subset = function (otherSet) {
+                if (this.size() > otherSet.size) {
+                    return false;
+                } else {
+                    for (let i = 0; i < this.size(); i++) {
+                        if (!otherSet.has(this.values()[i])) {
+                            return false;
+                        }
+                    };
+                    return true;
+                }
             };
         };
 
         // 测试代码
         let demo = new SetCustomer();
-        demo.add(1);
+        // demo.add(1);
         demo.add(2);
         console.log(demo.size());
         console.log(demo.values());
+        let one = new SetCustomer();
+        one.add(3);
+        // one.add(2);
+        // console.log(demo.union(one));
+        // console.log(demo.intersection(one));
+        // console.log(demo.difference(one));
+        console.log(demo.subset(one));
     </script>
 </body>
 
