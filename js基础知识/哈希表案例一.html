@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>哈希表案例一</title>
+</head>
+
+<body>
+    <h1>案例一 公司使用一种数据结构保存员工</h1>
+    <h3>使用数组存储</h3>
+    <ol>
+        <li>优势：通过id查找时效率极高，100w数据，999999位置的一数据，大概0.2ms+左右</li>
+        <li>劣势：通过某一字段查找时，效率较低，100w数据，通过姓名查找，999999位置的一数据，大概需要18ms+</li>
+    </ol>
+    <h3>使用哈希表(HashTable)存储</h3>
+    <ol>
+        <li></li>
+        <li></li>
+    </ol>
+    <script>
+        let employees = [];
+        // 存
+        let save = function (obj) {
+            // 存储到数组     
+            employees[hash(obj.name)] = obj;
+            // console.log(employees);
+        };
+        let find=function(obj){
+            let index=hash(obj.name);
+            return `在${index}的位置是${employees[index].name}`;
+        };
+        // 哈希函数
+        let hash = function (key) {
+            let hashIndex = 5381;
+            for (let i in key) {
+                // 获取字母对应的ascii码 
+                hashIndex = hashIndex * 33 + key[i].charCodeAt();
+            };
+            return hashIndex % 1013;
+        };
+        // 案例一 公司使用一种数据结构保存员工
+        // 使用数组
+        class Employees {
+            constructor(id, name, age, salary) {
+                this.id = id;
+                this.name = name;
+                this.age = age;
+                this.salary = salary;
+            }
+        };
+        let init = {
+            // 产生随机姓名
+            createName() {
+                let name = "";
+                for (let i = 0; i < 4; i++) {
+                    // 产生随机数  Math.ceil：向上取整  
+                    let number = Math.ceil(Math.random() * 25);
+                    // 产生随机字母 String.fromCharCode：将 Unicode 编码转为字符
+                    let letter = String.fromCharCode(number + 65);
+                    name += letter;
+                };
+                return name;
+            },
+            // 产生随机年龄
+            createAge() {
+                let age = Math.ceil(Math.random() * 99);
+                return age;
+            },
+            // 创建一个员工信息并添加到员工数组
+            createEmploy(count) {
+                for (let i = 0; i < count; i++) {
+                    let single = new Employees(i, this.createName(), this.createAge(), 5000);
+                    // employees.push(single);
+                    save(new Employees(i, this.createName(), this.createAge(), 5000));
+                };
+            }
+        };
+        let until = {
+            findByName(name) {
+                for (let i = 0; i < employees.length; i++) {
+                    // console.log(employees[i]!=undefined);
+                    if (employees[i] != undefined) {
+                        if (employees[i].name == name) {
+                            // return employees[i];
+                            return i;
+                        }
+                    }
+                }
+                return "不存在";
+            },
+            findById(id) {
+                return employees[id]
+            }
+        };
+        // 测试代码
+        // 初始化员工个数
+        init.createEmploy(1000000);
+        // 添加测试查找员工
+        let shuaxin = new Employees(500, "shuaxin", 21, 10000);
+        save(shuaxin);
+        // console.log(employees[500]);
+        // console.log(employees[116].name);
+        // employees.splice(999999, 0, shuaxin);
+        // console.time("根据id查询计时器");
+        // console.log(until.findById(999999));
+        // console.timeEnd("根据id查询计时器");
+        // console.time("根据姓名查询计时器");
+        // console.log(until.findByName("shuaxin"));
+        // console.timeEnd("根据姓名查询计时器");
+    </script>
+</body>
+
+</html>
