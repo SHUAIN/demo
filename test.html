@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function cule(num) {
+            if (num == 1 || num == 0) {
+                return 1;
+            } else {
+                return num + cule(num - 1);
+            }
+        };
+        let sum = 0;
+        for (let i = 1; i <= 5; i++) {
+            sum += cule(i);
+        };
+    </script>
+</body>
+
+</html>
