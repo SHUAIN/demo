@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>红黑树</title>
+</head>
+
+<body>
+    <h1>红黑树概念</h1>
+    <p>为了是二叉搜索树不出现非平衡树的情况而衍生出来的一种更完整结构的树</p>
+    <h1>红黑树特点</h1>
+    <ol>
+        <li>满足二叉搜索树的所有特征</li>
+        <li>节点是红色或者黑色</li>
+        <li>根节点是黑色</li>
+        <li>每个叶子节点都是黑色的null节点
+            <p style="color: red">可以理解成当一个节点没有子节点时我们用null节点给他补齐</p>
+        </li>
+        <li>每个红色的节点的两个子节点都是黑色
+            <p style="color: red">注:从每个叶子节点到根节点的路径上不能有两个连续的红色节点</p>
+        </li>
+        <li>从任意节点开始到其每个叶子节点的所有路径都包含相同数目的黑色节点</li>
+    </ol>
+    <h1>红黑树的相对平衡</h1>
+    <ol>
+        <li>从根节点到叶子节点的最长可能路径，不会超过最短可能路径的两倍长
+            <ul style="color: red">
+                <li>特点5决定了不可能有2个相连的红色节点</li>
+                <li>最短路径可能全部都是黑色节点(根节点没有子节点的情况，补全两个null节点)</li>
+                <li>最长的可能路径只可能是红黑交替</li>
+                <li>特点6表明了所有路径都有相同数目的黑色节点</li>
+                <li>这就表明了没有路径能多余任何其他路径的2倍长</li>
+            </ul>
+        </li>
+        <li>
+            结果就是这个数基本是平衡的
+        </li>
+        <li>
+            虽然不可能完全平衡，但是可以保证在极端的情况下，效率依旧相对比链表高
+        </li>
+    </ol>
+</body>
+
+</html>
