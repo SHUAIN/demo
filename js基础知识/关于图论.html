@@ -1,14 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>关于图论</title>
 </head>
+
 <body>
+    <h1>关于图
+        <br>
+    </h1>
+    <p>用来抽象实际生活中某些关系网的结构，比如人际关系网抽象成图，每个人就是这张图中的点，人与人之间的关系就是点点之间的连线</p>
+    <h1>和其他结构之间的关系</h1>
+    <p>树和链表是图的一种特殊表现形式</p>
+    <h1>图中常见术语</h1>
+    <ul>
+        <li>
+            顶点：图中的一个点；比如在地铁图中的某一站；人际关系网中某个人
+        </li>
+        <li>
+            边：顶点之间的距离；比如地铁图中两站之间的距离
+        </li>
+        <li>
+            相邻顶点：一条边链接在一起的2个顶点称为相邻顶点
+        </li>
+        <li>
+            度：一个顶点的度是相邻顶点的数量
+        </li>
+        <li>出度：某个顶点指向别的顶点的数量</li>
+        <li>入度：别的顶点指向某个顶点的数量</li>
+        <li>
+            路径：两顶点之间经过的所有顶点构成的一个顶点序列称为路径，可以有多个；
+            <ol>
+                <li>
+                    简单路径：顶点序列中不包含重复的顶点
+                </li>
+                <li>
+                    回路：顶点序列的第一项和最后一项是同一个顶点；就是从一个顶点出发转一圈又回到该点
+                </li>
+            </ol>
+        </li>
+        <li>
+            无向图：假设有AB两个顶点通过一条边连接在一起，可以从A-B也可以从B-A，这条边没有方向，就称为无向图；
+        </li>
+        <li>
+            有向图：假设有AB两个顶点通过一条边连接在一起，只可以从A->B或B->A，称为有向图
+        </li>
+        <li>
+            无权图：图中的边没有携带权重，称为无权图
+        </li>
+        <li>
+            带权图：边有一定的权重；这个权重可以表示各种想表示的数据，比如花费时间，顺序，等等
+        </li>
+    </ul>
+    <h1>图的表示</h1>
+    <ul>
+        <li>
+            使用邻接矩阵(表示顶点之间相邻关系的矩阵)
+            <ul>
+                <li>1.用数字或者字母表示顶点，然后用一维数组存放顶点(和它的数据)</li>
+                <li>
+                    2.用一个二维数组表示顶点之间的链接(边);
+                    <ul>
+                        <li>2.1假设a-b相连，即表示1，不相连表示0;</li>
+                        <li>
+                            2.2顶点到自己本身没有边，成为自回路，也用0表示
+                        </li>
+                        <li>
+                            2.3如果边带权重，当两点相连时，可以把这个数字按一定规则来表示
+                        </li>
+                        <li>
+                            2.4邻接矩阵表示无向图时，一定是对称的
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    3.邻接矩阵的问题：
+                    <ul>
+                        <li>3.1表示稀疏图(顶点之间的边很少的图)的时候会浪费很多内存空间,因为用0表示了很多不存在的边</li>
+                    </ul>
+                </li>
+                <li>
+                    4.多用于表示无向图
+                </li>
+            </ul>
+
+        </li>
+        <li>
+            使用邻接表
+            <ol>
+                <li>
+                    邻接表由顶点和相邻顶点的顶点列表组成
+                </li>
+                <li>
+                    数组/链表/字典(哈希表)都可以实现
+                </li>
+                <li>
+                    多用于表示有向图
+                </li>
+                <li>
+                    邻接表的问题
+                    <ul>
+                        <li>
+                            4.1计算出度比较简单
+                        </li>
+                        <li>
+                            4.2计算入度非常麻烦
+                        </li>
+                    </ul>
+                </li>
+            </ol>
+        </li>
+    </ul>
+    <h1>图的遍历</h1>
+    <p>对图中的每个顶点访问一遍，并且不能有重复的访问,对于图的遍历有2中常用算法</p>
+    <ul>
+        <li>
+            广度优先算法：BFS
+            <p>
+                从指定顶点开始遍历图，优先访问其所有相邻顶点(先宽后深)；基于队列实现
+            </p>
+        </li>
+        <li>
+            深度优先算法：DFS
+        </li>
+    </ul>
+    <p>以上两种算法都需要明确指出第一个要访问的顶点</p>
+    <h1>表示顶点的访问状态</h1>
+    <ul>
+        <li>
+            白色：表示顶点还没有被访问
+        </li>
+        <li>
+            灰色：表示该顶点被访问过，但未被探索过
+        </li>
+        <li>
+            黑色：表示该顶点被访问过且被完全探索过
+        </li>
+    </ul>
+    <script src="../数据结构文件整理/Queue.js"></script>
     <script>
-        
+        function Graph() {
+            // 属性  顶点(用数组存储)和边(用字典存储，即js的对象)
+            this.vertexes = [];
+            // key表示每个顶点，values为数组存储到某点的边
+            this.eage = {};
+            // 方法
+            // 1.添加顶点  参数为要填的顶点
+            Graph.prototype.addVertex = function (v) {
+                // 添加该点到数组
+                this.vertexes.push(v);
+                // 并创建一对键值对 键为该点，值为存储该点指向其他点的一个数组
+                this.eage[v] = [];
+            };
+
+            // 2.添加边  参数为两个要连接的顶点
+            Graph.prototype.addEage = function (v1, v2) {
+                // 2.1检查2个顶点是否存在不存在报错
+                if (this.check(v1) && this.check(v2)) {
+                    // 有向图只用这一步  无向图还要保存反方向 可以在这里直接添加 也可以在调用该方法 
+                    this.eage[v1].push(v2);
+                    // this.eage[v2].push(v1);
+                } else {
+                    console.error('检查你要连接的顶点是否存在');
+                }
+            };
+            //3. 检查某个定点是否存在
+            Graph.prototype.check = function (v) {
+                // 因为存在返回0 不存在返回-1
+                return this.vertexes.indexOf(v) + 1;
+            };
+            // 4.当通过重新指向 ；哎定义多个定点的时候，调用该方法，给每个顶点初始化一个存储边的数组
+            Graph.prototype.addEages = function () {
+                for (let i = 0; i < this.vertexes.length; i++) {
+                    this.eage[this.vertexes[i]] = [];
+                };
+            };
+            // 5.toString打印所有的顶点和边
+            Graph.prototype.toString = function () {
+                let vs = '';
+                for (let i in this.vertexes) {
+                    vs += this.vertexes[i];
+                };
+                console.log(vs);
+                let eages = 0;
+                for (let i in this.eage) {
+                    eages += this.eage[i].length;
+                };
+                console.log(`eages=${eages}`);
+            };
+            // 6.初始化每个顶点的颜色
+            Graph.prototype.initColor = function () {
+                let color = [];
+                for (let i in this.vertexes) {
+                    color[this.vertexes[i]] = 'white';
+                };
+                return color;
+            };
+            // 7.广度搜索算法 BFS  参数为 指定开始访问的节点 和返回一个回调函数
+            Graph.prototype.BFS = function (initV, handler) {
+                // 1.初始化颜色
+                let color = this.initColor();
+                // 2.创建队列
+                let que = new Queue();
+
+                // 3.将第一个顶点插入队列
+                que.enqueue(initV);
+                // 4.循环队列取出元素
+                while (que.isEmpty()) {
+                    // 4.1取出顶点
+                    let v = que.dequeue();
+                    // 4.2获取顶点的相邻顶点
+                    let vList = this.eage[v];
+                    // 4.3将v颜色设置成灰色
+                    color[v] = 'gray';
+                    // 4.4把相邻顶点插入队列 
+                    for (let i in vList) {
+                        // 遍历相邻节点
+                        let e = vList[i];
+                        // 检查该点之前有没有被访问过
+                        if (color[e] == 'white') {
+                            color[e] == 'gray';
+                            que.enqueue(e);
+                        }
+                    }
+                    // 4.5.访问v节点
+                    handler(v);
+                    // 4.6访问完毕
+                    color[v] = 'black';
+                }
+            };
+        };
+        // 测试代码
+        let one = new Graph();
+
+        let tops = ['A', 'B', 'C', 'D'];
+        one.vertexes = tops;
+        one.addEages();
+        one.addEage('A', 'B');
+        one.addEage('A', 'C');
+        one.addEage('B', 'D');
+        one.addEage('C', 'D');
+        console.log(one.vertexes);
+        console.log(one.eage);
+        one.toString();
+        // 测试BFS
+        let res = '';
+        one.BFS('A', function (v) {
+            res += v + ' ';
+        });
+        console.log(`res=${res}`);
     </script>
 </body>
+
 </html>
