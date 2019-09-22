@@ -14,7 +14,7 @@ class Queue {
     };
     // 判断队列中是否含有元素
     isEmpty() {
-        return this.item.length;
+        return this.item.length==0;
     };
     // 判断队列的元素个数
     size() {
