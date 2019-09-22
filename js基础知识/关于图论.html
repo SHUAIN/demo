@@ -209,7 +209,7 @@
                 // 3.将第一个顶点插入队列
                 que.enqueue(initV);
                 // 4.循环队列取出元素
-                while (que.isEmpty()) {
+                while (!que.isEmpty()) {
                     // 4.1取出顶点
                     let v = que.dequeue();
                     // 4.2获取顶点的相邻顶点
@@ -217,12 +217,13 @@
                     // 4.3将v颜色设置成灰色
                     color[v] = 'gray';
                     // 4.4把相邻顶点插入队列 
-                    for (let i in vList) {
+                    for (let i=0;i<vList.length;i++) {
                         // 遍历相邻节点
                         let e = vList[i];
                         // 检查该点之前有没有被访问过
                         if (color[e] == 'white') {
-                            color[e] == 'gray';
+                            console.log(e);
+                            color[e] = 'gray';
                             que.enqueue(e);
                         }
                     }
