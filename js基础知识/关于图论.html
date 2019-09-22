@@ -115,16 +115,16 @@
         </li>
     </ul>
     <h1>图的遍历</h1>
-    <p>对图中的每个顶点访问一遍，并且不能有重复的访问,对于图的遍历有2中常用算法</p>
+    <p>对图中的每个顶点访问一遍，并且不能有重复的访问,对于图的遍历有2种常用算法，遍历时都不能重复访问节点</p>
     <ul>
         <li>
             广度优先算法：BFS
             <p>
-                从指定顶点开始遍历图，优先访问其所有相邻顶点(先宽后深)；基于队列实现
+                从指定顶点开始遍历图，优先访问其所有相邻顶点(先宽后深)；基于队列实现；和树的层序遍历原理一样
             </p>
         </li>
         <li>
-            深度优先算法：DFS
+            深度优先算法：DFS；原理类似于树的先序遍历
         </li>
     </ul>
     <p>以上两种算法都需要明确指出第一个要访问的顶点</p>
@@ -201,37 +201,74 @@
             };
             // 7.广度搜索算法 BFS  参数为 指定开始访问的节点 和返回一个回调函数
             Graph.prototype.BFS = function (initV, handler) {
-                // 1.初始化颜色
-                let color = this.initColor();
-                // 2.创建队列
-                let que = new Queue();
+                if (this.check(initV)) {
+                    // 1.初始化颜色
+                    let color = this.initColor();
+                    // 2.创建队列
+                    let que = new Queue();
 
-                // 3.将第一个顶点插入队列
-                que.enqueue(initV);
-                // 4.循环队列取出元素
-                while (!que.isEmpty()) {
-                    // 4.1取出顶点
-                    let v = que.dequeue();
-                    // 4.2获取顶点的相邻顶点
-                    let vList = this.eage[v];
-                    // 4.3将v颜色设置成灰色
-                    color[v] = 'gray';
-                    // 4.4把相邻顶点插入队列 
-                    for (let i=0;i<vList.length;i++) {
-                        // 遍历相邻节点
-                        let e = vList[i];
-                        // 检查该点之前有没有被访问过
-                        if (color[e] == 'white') {
-                            console.log(e);
-                            color[e] = 'gray';
-                            que.enqueue(e);
+                    // 3.将第一个顶点插入队列
+                    que.enqueue(initV);
+                    // 4.循环队列取出元素
+                    while (!que.isEmpty()) {
+                        // 4.1取出顶点
+                        let v = que.dequeue();
+                        // 4.2获取顶点的相邻顶点
+                        let vList = this.eage[v];
+                        // 4.3将v颜色设置成灰色
+                        color[v] = 'gray';
+                        // 4.4把相邻顶点插入队列 
+                        for (let i = 0; i < vList.length; i++) {
+                            // 遍历相邻节点
+                            let e = vList[i];
+                            // 检查该点之前有没有被访问过
+                            if (color[e] == 'white') {
+                                console.log(e);
+                                color[e] = 'gray';
+                                que.enqueue(e);
+                            }
                         }
+                        // 4.5.访问v节点
+                        handler(v);
+                        // 4.6访问完毕
+                        color[v] = 'black';
                     }
-                    // 4.5.访问v节点
-                    handler(v);
-                    // 4.6访问完毕
-                    color[v] = 'black';
+                } else {
+                    console.error('检查顶点是否存在');
                 }
+
+            };
+            // 8.深度优先搜索遍历
+            Graph.prototype.DFS = function (initV, handler) {
+                if (this.check(initV)) {
+                    // 1.初始化颜色
+                    let color = this.initColor();
+                    this.recurrence(initV, color, handler);
+                } else {
+                    console.error('检查顶点是否存在');
+                }
+
+            };
+            // 递归访问顶点
+            Graph.prototype.recurrence = function (v, color, handler) {
+                // 1标记正在访问
+                color[v] = 'gray';
+                // 2处理顶点
+                handler(v);
+                // 3探索该点相邻顶点
+                let vList = this.eage[v];
+                for (let i in vList) {
+                    let e = vList[i];
+                    if (color[e] == 'white') {
+                        color[e] = 'gray';
+                        // 递归探索该点
+                        this.recurrence(e, color, handler);
+                    }
+                };
+
+                // 4标记探索完成
+                color[v] = "black";
+
             };
         };
         // 测试代码
@@ -247,9 +284,13 @@
         console.log(one.vertexes);
         console.log(one.eage);
         one.toString();
-        // 测试BFS
         let res = '';
-        one.BFS('A', function (v) {
+        // 测试BFS
+        // one.BFS('A', function (v) {
+        //     res += v + ' ';
+        // });
+        // 测试DFS
+        one.DFS('A', function (v) {
             res += v + ' ';
         });
         console.log(`res=${res}`);
