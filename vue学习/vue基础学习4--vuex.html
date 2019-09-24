@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vuex通信</title>
+    <style>
+    </style>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" v-cloak>
+        {{name}}
+        <ul>
+            <li>{{showGet}}</li>
+        </ul>
+        <show></show>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.bootcss.com/vuex/3.1.1/vuex.min.js"></script>
+    <script>
+        const store = new Vuex.Store({
+            state: {
+                count: 0,
+                todos: [
+                    {
+                        id: 1, text: "one", done: true
+                    },
+                    {
+                        id: 2, text: "two", done: false
+                    }
+                ]
+            },
+            getters: {
+                doneTodos: state => {
+                    // todos的done属性石true时返回
+                    return state.todos.filter(todo => todo.done)
+                }
+            },
+            mutations: {
+                increment(state) {
+                    state.count++;
+                }
+            }
+        });
+        // 创建组件
+        let show = {
+            template: "<h1>{{show}}</h1>",
+            /*  
+                当需要获取多个状态时 可以用辅助函数mapState
+                mapState：动态生成我们需要的计算属性
+             */
+            computed: {
+                show() {
+                    // 2.子组件通过 this.$store.state.***获取
+                    return this.$store.state.count;
+                },
+            }
+        };
+        new Vue({
+            el: "#app",
+            //1.组件开发时多用： 
+            // 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件
+            store,
+            data() {
+                return {
+                    name: "vuex学习"
+                }
+            },
+            computed: {
+                showGet() {
+                    // 1.通过属性访问 
+                    // 2.也可以通过方法调用 但这样就不能缓存结果
+                    return this.$store.getters.doneTodos;
+                }
+            },
+            // 组件注册
+            components: {
+                show
+            },
+            created() {
+                store.commit('increment');
+                console.log(store.state.count);
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+
+<body>
+    <div id="app">
+        <!-- 页面跳转 -->
+        <button @click="go">编程导航</button>
+        <router-link to='/one'>
+            <button>GO ONE</button>
+        </router-link>
+        <router-link to='/two'>
+            <button>GO TWO</button>
+        </router-link>
+        <router-link to='/user/2'>
+            <button>GO user</button>
+        </router-link>
+        <!-- 显示响应页面 -->
+        <div>
+            <router-view></router-view>
+        </div>
+
+    </div>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.common.dev.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+
+        // 定义页面组件
+        const One = {
+            template: '<div>one</div>',
+            created() {
+                console.log('a组件');
+            }
+        };
+        const Two = {
+            template: '<div>two</div>',
+            created() {
+                console.log('b组件');
+            }
+        };
+        const User = {
+            template: '<div>user{{ $route.params.id }}</div>'
+        }
+        const Not = {
+            template: '<div>404</div>'
+        }
+        const Demo = {
+            template: '<div>demo</div>'
+        }
+        // 配置路由
+        const routes = [
+            {
+                path: '/one',
+                component: One
+            },
+            {
+                path: '/two',
+                component: Two
+            },
+            {
+                path: '/user/:id',
+                component: User
+            },
+            {
+                path: '*',
+                component: Not
+            },
+            {
+                path: '/demo',
+                component: Demo
+            }
+        ];
+        // 创建一个路由对象
+        const router = new VueRouter({
+            routes
+        });
+        // vue实例
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    name: "vue",
+                }
+            },
+            router,
+            methods: {
+                go() {
+                    // 编程导航
+                    // router.push({ path: '/demo', component: Demo })
+                    router.replace({ path: '/demo', component: Demo });
+                }
+            }
+        }).$mount('#app')
+    </script>
+</body>
+
+</html>
