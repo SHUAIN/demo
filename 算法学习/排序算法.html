@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>大o表示法</h1>
+    <ol>
+        <li>
+            算法的效率和数据量的大小有关
+        </li>
+        <li>
+            大o表示法就是用来描述算法的速度如何随着数据量大小而变化的一种计量方式
+        </li>
+    </ol>
+    <h1>常见表示效率比较</h1>
+    <p>
+        O(1)>O(log(n))>O(n)>O(nlog(n))>O(n的平方)>O(2的n次方)
+    </p>
+    <h1>大o表示法的推导</h1>
+    <ol>
+        <li>用常量1取代运行时间中所有加法常量</li>
+        <li>在修改后的运行函数中，只保留最高阶</li>
+        <li>如果最高存在且不为1，则除去与这个项相乘的常数</li>
+    </ol>
+    <h1>常见排序算法</h1>
+    <ol>
+        <li>
+            举例：
+            <br>
+            冒泡/选择/插入/归并/计数/(counting sort)/基数(radix sort)/希尔/堆/桶//快速
+        </li>
+        <li>
+            简单排序：冒泡、选择、插入
+        </li>
+        <li>
+            高级排序：希尔、快速(着重掌握)
+        </li>
+    </ol>
+    <h1>具体实现</h1>
+    <ul>
+        <li>
+            冒泡算法
+            <ol>
+                <li>双层循环实现，外层循环控制比较结束的位置</li>
+                <li>内层循环控制2个比较的值</li>
+                <li>冒泡排序需要比较(n-1)+(n-2)+...+1=n(n-1)/2=n的2次方/2-n/2</li>
+                <li>换算成大o表示法：O(n的平方)</li>
+            </ol>
+        </li>
+    </ul>
+    <script>
+        function ArrayList() {
+            this.items = [];
+            // 插入元素
+            ArrayList.prototype.insert = function (item) {
+                this.items.push(item);
+            };
+            ArrayList.prototype.toString = function () {
+                return this.items.join('-');
+            };
+            // 用到的工具函数
+            ArrayList.prototype.swap = function (a, b) {
+                if (this.items[a] > this.items[b]) {
+                    let tmp = this.items[a];
+                    this.items[a] = this.items[b];
+                    this.items[b] = tmp;
+                }
+
+            }
+
+            /*排序算法*/
+            // 1.冒泡算法(两个值比较，较大的值和较小的值交换位置;每一轮两个值比较的次数比上一轮-1)
+            ArrayList.prototype.bubblesort = function () {
+                let length = this.items.length;
+                // j来控制比较到的位置
+                for (let j = length - 1; j > 0; j--) {
+                    // i控制每次比较的值
+                    for (let i = 0; i < j; i++) {
+                        this.swap(i, i + 1);
+                    }
+                }
+            };
+        }
+
+        let a = new ArrayList();
+        a.insert(5);
+        a.insert(100);
+        a.insert(90);
+        a.insert(80);
+        a.insert(70);
+        console.log(a.toString());
+        a.bubblesort();
+        console.log(a.toString());
+    </script>
+</body>
+
+</html>
