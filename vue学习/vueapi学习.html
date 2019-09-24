@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        h3,
+        p {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .app>div {
+            background-color: lightblue;
+            text-align: center;
+            line-height: 10vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="app" v-cloak>
+        <h3>Vue.extend组件构造器</h3>
+        <p> 通过组件构造器创建一个组件 创建后需要全局或局部注册才可使用(动态创建组件的时候使用吧)</p>
+        <div>
+            <one></one>
+        </div>
+        <h3>Vue.nextTick获取更新DOM</h3>
+        <p>在修改数据之后立即使用这个方法，获取更新后的 DOM</p>
+        <div>
+            {{name}}
+            <button @click='change'>click</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        let one = Vue.extend({
+            template: `<div>{{name}}</div>`,
+            data() {
+                return {
+                    name: '通过extend API创建的组件'
+                }
+            }
+        });
+        Vue.component('one', one);
+        let app = new Vue({
+            el: "#app",
+            data() {
+                return {
+                    name: 'testApi'
+                }
+            },
+            methods: {
+                change() {
+                    this.name = "更新name";
+                    console.log(this.name);
+                    let that = this;
+                    Vue.nextTick(function() {
+                        console.log('dom updated');
+                        that.name += ' dom更新完成'
+                    })
+                }
+            }
+        })
+    </script>
+</body>
