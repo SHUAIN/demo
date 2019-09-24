@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue基础学习---组件通信</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .app>div {
+            width: 100vw;
+            margin-bottom: 2vh;
+            background-color: lightblue;
+            text-align: center;
+            line-height: 10vh;
+            cursor: pointer;
+        }
+
+        h3,
+        p {
+            text-align: center;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="app" v-cloak>
+        <h3>vuex</h3>
+        <p>梳理总结下除过强大且繁琐的vuex之外的几种组件通信方式</p>
+        <h3>子父组件通信</h3>
+        <p>子组件通过$emit触发一个自定义事件，传递数据给父组件</p>
+        <div>
+            接受page-two传递的数据：
+            {{text}}
+        </div>
+        <page-two v-on:ok="recive"></page-two>
+        <h3>父子组件通信</h3>
+        <p>
+            1.父组件通过v-bind绑定要传递的数据，然后子组件通过props接收
+            <br>
+            2. props只能接受上一层父组件传递的数据
+        </p>
+        <div>
+            <page-one :name="name"></page-one>
+            <button @click='change'>click</button>
+        </div>
+        <h3>插槽的使用</h3>
+        <p>
+            1.普通插槽：在组件内部定义一个slot标签
+            <br>
+            2.具名插槽：定义slot时，添加name属性，然后在使用该组件时，通过v-slot来指定相匹配的插槽
+        </p>
+        <Three v-cloak>
+            普通插槽使用
+            <template v-slot:one>具名插槽使用</template>
+        </Three>
+        <h3>BUS-父子、子父、跨级通信</h3>
+        <p>通过$emit(触发)/$on(监听)中央事件中心处理 父子(子父)、兄弟、甚至跨级通信</p>
+        <One></One>
+        <Two></Two>
+        <h3>跨级组件通信(一个组件和它的孙子组件)</h3>
+        <p>
+            1.使用$attrs和inheritAttrs进行跨级通信
+            <br>
+            2.通过v-bind绑定$attrs可以把父组件传递的没有被props注册的数据再一次传递给自己的子组件,然后通过$attrs获取
+            <br>
+            3.inheritAttrs默认是开启的，当关闭后，就不会让没有在props注册的属性，渲染到页面
+            <br>
+            (说明：打开chrome开发工具，会看到通过v-bind传递一个属性，该属性没有在props注册时，会当做HTML的特性渲染到dom结构里，inheritAttrs就是关闭这个功能；
+            <br>
+            他不影响class和style)
+        </p>
+        <Four v-bind:demo="demo" :demotwo="demotwo"></Four>
+        <h3>使用provide(对象格式)和inject(数组/字符数组格式)进行跨级通信</h3>
+        <p>
+            1. 通过在父组件中使用provide设置要让所有子组件继承的属性，在子组件中使用inject来获取
+            <br>
+            2.父子，和跨级组件通讯
+            <br>
+            3.但这样做不是响应式，当父组件数据发生变化后，子组件继承的数据并不会随之变化，需要用vue.observable处理
+            <br>
+            4.因为这种方式多用于获取父组件状态，所以为了满足这种需要，就需要对provide的属性进行响应式处理；单纯组件之间传递参数一般不需要
+        </p>
+        <div>
+            <five></five>
+            <button @click='change'>click</button>
+        </div>
+
+        <h3>$parent和$childern和ref进行父子组件通信</h3>
+        <p>
+            1.通过获取到父子组件的实例，然后获取数据
+            <br>
+            2.ref和$childern都是用来获取子组件的，但是一个父组件有多个子组件的时候还是推荐使用ref
+        </p>
+        <seven ref='seven'></seven>
+        <div>
+            获取到seven的数据:{{demothree}}
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./js/component.js"></script>
+    <script>
+        // 创建中央事件处理中心
+        let Event = new Vue();
+        // 是一个对象变成可响应式
+        new Vue({
+            el: '#app',
+            data() {
+                // 让传递给子组件的name属性变成响应式
+                this.name = Vue.observable({
+                    name: 'this is root data'
+                });
+                return {
+                    name: this.name,
+                    text: '',
+                    demo: 'demo',
+                    demotwo: 'demotwo',
+                    demothree: '',
+                    test: 'provide'
+                }
+            },
+            // 可以是对象可以是函数
+            provide() {
+                // 为了可以获取到该继承属性 把该属性挂载到全局上
+                this.obj = Vue.observable({
+                    name: this.test
+                });
+                return {
+                    obj: this.obj
+                }
+            },
+            // provide:{
+            //     name:this.test
+            // },
+            components: {
+                'Three': three,
+                'One': one,
+                'Two': two,
+                'Four': four
+            },
+            methods: {
+                recive(e) {
+                    console.log(e);
+                    this.text = e;
+                },
+                change() {
+                    console.log(this.obj.name);
+                    this.obj.name = '改变';
+                    this.name.name = '改变name';
+                }
+            },
+            mounted() {
+                console.log(this.$refs.seven.msg);
+                this.demothree = this.$refs.seven.msg;
+            }
+        })
+    </script>
+</body>
+
+</html>
