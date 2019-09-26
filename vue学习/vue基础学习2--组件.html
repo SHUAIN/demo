@@ -6,33 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>vue基础学习---组件通信</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .app>div {
-            width: 100vw;
-            margin-bottom: 2vh;
-            background-color: lightblue;
-            text-align: center;
-            line-height: 10vh;
-            cursor: pointer;
-        }
-
-        h3,
-        p {
-            text-align: center;
-        }
-
-        [v-cloak] {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/prism.css">
 </head>
 
 <body>
@@ -44,6 +19,7 @@
         <div>
             接受page-two传递的数据：
             {{text}}
+            <br>
         </div>
         <page-two v-on:ok="recive"></page-two>
         <h3>父子组件通信</h3>
@@ -109,6 +85,7 @@
             获取到seven的数据:{{demothree}}
         </div>
     </div>
+    <script src="./js/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="./js/component.js"></script>
     <script>

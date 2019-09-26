@@ -45,12 +45,22 @@
     <h1>具体实现</h1>
     <ul>
         <li>
-            冒泡算法
+            冒泡排序
             <ol>
                 <li>双层循环实现，外层循环控制比较结束的位置</li>
                 <li>内层循环控制2个比较的值</li>
                 <li>冒泡排序需要比较(n-1)+(n-2)+...+1=n(n-1)/2=n的2次方/2-n/2</li>
                 <li>换算成大o表示法：O(n的平方)</li>
+                <li>交换次数：n*(n-1)/4,即O(n的2次方)</li>
+            </ol>
+        </li>
+        <li>
+            选择排序
+            <ol>
+                <li>选取每一个元素依次和后面的元素进行比较</li>
+                <li>如果大于后面的元素，交换位置</li>
+                <li>比较次数和冒泡一样</li>
+                <li>交换次数为N-1次 即 O(n) ，所以效率高于冒泡</li>
             </ol>
         </li>
     </ul>
@@ -75,7 +85,7 @@
             }
 
             /*排序算法*/
-            // 1.冒泡算法(两个值比较，较大的值和较小的值交换位置;每一轮两个值比较的次数比上一轮-1)
+            // 1.冒泡算法
             ArrayList.prototype.bubblesort = function () {
                 let length = this.items.length;
                 // j来控制比较到的位置
@@ -86,8 +96,17 @@
                     }
                 }
             };
+            // 2.选择排序
+            ArrayList.prototype.selectionsort = function () {
+                let length = this.items.length;
+                for (let i = 0; i < length - 1; i++) {
+                    for (let j = i + 1; j < length; j++) {
+                        this.swap(i, j);
+                    }
+                }
+            };
         }
-
+        // 测试代码
         let a = new ArrayList();
         a.insert(5);
         a.insert(100);
@@ -95,7 +114,8 @@
         a.insert(80);
         a.insert(70);
         console.log(a.toString());
-        a.bubblesort();
+        // a.bubblesort();
+        a.selectionsort();
         console.log(a.toString());
     </script>
 </body>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/prism.css">
+    <link rel="stylesheet" href="./css/common.css">
+</head>
+
+<body>
+    <div id="app" class="app" v-cloak>
+        <h3>说明</h3>
+        <div style="background-color: #9fbcc2;">vue的全局api可以通过Vue来调用；如果在实例内部也可以用this.$+api的形式调用</div
+            style="background-color: lightskyblue;">
+        <h3>Vue.extend组件构造器</h3>
+        <p> 通过组件构造器创建一个组件 创建后需要全局或局部注册才可使用(动态创建组件的时候使用吧)</p>
+        <div>
+            <one></one>
+        </div>
+        <h3>Vue.nextTick获取更新DOM</h3>
+        <p>在修改数据之后立即使用这个方法，获取更新后的 DOM</p>
+        <div>
+            {{name}}
+            <button @click='change'>click</button>
+            <br>
+        </div>
+        <h3>Vue.set设置响应式的对象</h3>
+        <p>向对象中添加一个属性并赋值，这个新属性同样是响应式的，且会触发视图更新</p>
+        <div>
+            <ul>
+                <li v-for='(item,index) in man'>{{item}}</li>
+            </ul>
+            <button @click='add'>add</button>
+            <br>
+            <pre><code class="code language-javascript">
+                    new Vue({
+                        data:{
+                            name: 'testApi',
+                            man: {
+                                name: 'wade',
+                                sex: '男',
+                            }
+                        },
+                        methods:{
+                            add() {
+                                Vue.set(this.man, 'age', 41);
+                                console.log(this.man);
+                            },
+                        }
+                    })
+                    
+                </code></pre>
+        </div>
+        <h3>Vue.delete</h3>
+        <p>用来删除对象的一个属性，并且会触发试图更新</p>
+        <div>
+            <p>删除上一个例子中添加的年龄属性</p>
+            <button @click='del'>delete</button>
+            <br>
+            <pre><code class="code language-javascript">
+                new Vue({
+                    data:{
+                        name: 'testApi',
+                        man: {
+                            name: 'wade',
+                            sex: '男',
+                        }
+                    },
+                    methods:{
+                        del() {
+                            this.$delete(this.man, 'age');
+                        }
+                    }
+                })
+                
+            </code></pre>
+        </div>
+        <h3>vue.directive用来获取或者注册指令</h3>
+        <p>当需要对dom底层进行操作的时候，可以把这些功能封装成自己的指令</p>
+        <p>可以全局定义也可以在组件中继续进行局部定义</p>
+
+        <div>
+            <input type="text" v-focus>
+            <br>
+            <pre><code class="code.language-javascript">
+                /*全局定义*/
+                Vue.directive('focus', {
+                    // 当被绑定的元素插入到 DOM 中时……
+                    inserted: function (el) {
+                        // 聚焦元素
+                        el.focus()
+                    }
+                });
+                /*局部定义*/
+                directives: {
+                    focus: {
+                        // 指令的定义
+                        inserted: function (el) {
+                            el.focus()
+                        }
+                    }
+                }
+            </code></pre>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="./js/apiTest.js"></script>
+    <script src="./js/prism.js"></script>
+
+</body>
