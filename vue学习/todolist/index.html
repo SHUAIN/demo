@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel="stylesheet" href="./css/home.css">
+    <!-- 轮播插件 -->
+    <link rel="stylesheet" href="./css/swiper.css">
+    <!-- iconfont -->
+    <link rel="stylesheet" href="./css/iconfont.css">
+
+</head>
+
+<body>
+    <div id="app" v-cloak class="app">
+        <home></home>
+    </div>
+    <script src="./js/vue.js"></script>
+    <!-- 轮播插件 -->
+    <script src="./js/swiper.js"></script>
+    <!-- 首页组件 -->
+    <script src="./pages/home.js"></script>
+
+
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                name: 'index',
+            },
+            components: {
+                home
+            }
+        })
+    </script>
+</body>
+
+</html>

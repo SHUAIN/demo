@@ -87,6 +87,16 @@
 
             </ol>
         </li>
+        <li>
+            快速排序
+            <ol>
+                <li>大多数情况下，快速排序效率最高</li>
+                <li>原理：在一组数中，随机找到一个数，然后把比他小的放在左边，比他大的放在左边；然后对两边的分组重复这个操作</li>
+                <li>每次找的这个数称为枢纽</li>
+                <li>使用递归实现</li>
+                <li>如何找枢纽：取头，中，尾三个数，在这中间取比较中间的数字</li>
+            </ol>
+        </li>
     </ul>
     <script>
         function ArrayList() {
@@ -111,6 +121,7 @@
             /*排序算法*/
             // 1.冒泡算法
             ArrayList.prototype.bubblesort = function () {
+                console.time('冒泡排序');
                 let length = this.items.length;
                 // j来控制比较到的位置
                 for (let j = length - 1; j > 0; j--) {
@@ -119,15 +130,18 @@
                         this.swap(i, i + 1);
                     }
                 }
+                console.timeEnd('冒泡排序');
             };
             // 2.选择排序
             ArrayList.prototype.selectionsort = function () {
+                console.time('选择排序');
                 let length = this.items.length;
                 for (let i = 0; i < length - 1; i++) {
                     for (let j = i + 1; j < length; j++) {
                         this.swap(i, j);
                     }
                 }
+                console.timeEnd('选择排序');
             };
             // 3.插入排序
             ArrayList.prototype.insertingsort = function () {
@@ -167,20 +181,51 @@
                 }
                 console.timeEnd('希尔排序');
             }
+            ArrayList.prototype.shellsort2 = function () {
+                console.time('希尔排序2');
+                let length = this.items.length;
+                let gap = Math.floor(length / 2);
+                while (gap >= 1) {
+                    for (let i = gap; i < length; i++) {
+                        let tmp = this.items[i];
+                        let j = i;
+                        while (this.items[j - gap] > tmp && j > gap - 1) {
+                            this.items[j] = this.items[j - gap];
+                            j -= gap;
+                        }
+                        this.items[j] = tmp;
+                    }
+                    gap = Math.floor(gap / 2);
+
+                };
+                console.timeEnd('希尔排序2');
+            }
+            // 5.快速排序
+            // 5.1选择枢纽
+            ArrayList.prototype.media = function (left, right) {
+                // 1.取中间值
+                let center = Math.floor((left + right - 1) / 2);
+                // 2.判断大小 并交换位置 
+                if (this.items[left] > this.items[center]) {
+                    this.swap(left, center);
+                } else if (this.items[center] > this.items[right]) {
+                    this.swap(center, right);
+                }
+            }
         }
         // 测试代码
         let a = new ArrayList();
-        a.insert(5);
-        a.insert(100);
-        a.insert(90);
-        a.insert(80);
-        a.insert(70);
+        for (let i = 50; i > 0; i--) {
+            a.insert(i);
+        }
         console.log(a.toString());
         // a.bubblesort();
         // a.selectionsort();
         // a.insertingsort();
         // a.shellsort();
-        console.log(a.toString());
+        // a.shellsort2();
+        a.media(0, a.items.length);
+        // console.log(a.toString());
     </script>
 </body>
 

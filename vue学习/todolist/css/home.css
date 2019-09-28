@@ -1,0 +1,76 @@
+[v-cloak] {
+    display: none;
+}
+
+body,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+.home li {
+    list-style: none;
+}
+
+.home {
+    width: 100vw;
+    height: 100vh;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    overflow: hidden;
+}
+
+.home .nav {
+    display: flex;
+    justify-content: space-around;
+}
+.home .nav .tittle{
+    font-weight: bolder;
+}
+.home .nav li {
+    display: inline-block;
+    color: #ffffff;
+}
+
+.home .user {
+    margin-left: 12%;
+    color: #ffffff;
+    font-size: 25px;
+}
+
+.home .user li {
+    margin: 5%;
+}
+
+.home .swiper-container {
+    overflow: initial;
+    width: 70vw;
+    height: 60vh;
+
+}
+
+.home .swiper-slide {
+    background-color: #ffffff;
+    box-shadow: 0 15px 15px 0 rgba(15, 37, 64, 0.3);
+    border-radius: 30px;
+    margin-right: 5%;
+}
+
+.home span {
+    font-size: 2em;
+}
+
+.home .swiper-slide:nth-child(even) p>span {
+    color: lightskyblue;
+}
+
+.home .swiper-slide:nth-child(odd) p>span {
+    color: lightsalmon;
+} 
+
+.home .swiper-slide {
+    text-align: center;
+    line-height: 15vh;
+}
