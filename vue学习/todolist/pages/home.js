@@ -1,4 +1,4 @@
-let html = `
+let homeHtml = `
 <div class="home" ref="target">
     <ul class="nav" >
         <li>
@@ -6,7 +6,7 @@ let html = `
         </li>
         <li class="tittle">TODO</li>
         <li>
-            <span class="iconfont icon-search"></span>
+            <span class="iconfont icon-search"></span>  
         </li>
     </ul>
     <ul class="user">
@@ -16,12 +16,12 @@ let html = `
     </ul>
     <div class="swiper-container">
         <div class="swiper-wrapper" >
-            <div ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index" >
-               <p>
-                <span :class=item.icon></span>
-               </p>
-               <p>{{item.name}}</p>
-               <p>{{item.des}}</p>
+            <div ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index" @click="go">
+                <p>
+                    <span :class=item.icon></span>
+                </p>
+                <p>{{item.name}}</p>
+                <p>{{item.des}}</p>
             </div>
         </div>
     </div>
@@ -29,10 +29,10 @@ let html = `
 `;
 
 let home = {
-    template: html,
+    template: homeHtml,
     data() {
         return {
-            backColor: ['lightsalmon','lightskyblue', 'lightsalmon'],
+            backColor: ['lightsalmon', 'lightskyblue', 'lightsalmon'],
             user: {
                 name: 'shauxin',
                 about: 'keep passion'
@@ -54,18 +54,30 @@ let home = {
             }],
         }
     },
+    methods: {
+        go() {
+            router.push({
+                path: '/detail',
+                component: detail
+            })
+        }
+    },
     mounted() {
-        let that=this;
+        let that = this;
         var mySwiper = new Swiper('.swiper-container', {
             // 选项配置
             // loop: true  //开启循环
             on: {
                 // swiper 当切换到下一页时 执行该函数
                 slideChangeTransitionEnd: function () {
-                    console.log(this.activeIndex);
                     that.$refs.target.style.backgroundColor = that.backColor[this.activeIndex];
                 },
+                // 点击每一页 进行编程路由跳转
+                click: function () {
+                    console.log(this.activeIndex);
+                },
             },
+
         })
     }
 }

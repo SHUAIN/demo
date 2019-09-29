@@ -26,6 +26,7 @@ ul {
 .home .nav {
     display: flex;
     justify-content: space-around;
+    margin-top: 5%;
 }
 .home .nav .tittle{
     font-weight: bolder;
@@ -33,6 +34,7 @@ ul {
 .home .nav li {
     display: inline-block;
     color: #ffffff;
+    line-height: 10px;
 }
 
 .home .user {
