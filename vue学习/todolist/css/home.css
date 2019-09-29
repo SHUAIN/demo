@@ -15,11 +15,12 @@ ul {
 .home {
     width: 100vw;
     height: 100vh;
-    background-color: lightblue;
+    background-color: lightsalmon;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     overflow: hidden;
+    transition: all 1s;
 }
 
 .home .nav {

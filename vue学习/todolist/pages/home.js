@@ -1,6 +1,6 @@
 let html = `
-<div class="home">
-    <ul class="nav">
+<div class="home" ref="target">
+    <ul class="nav" >
         <li>
             <span class="iconfont icon-instruction"></span>
         </li>
@@ -15,8 +15,8 @@ let html = `
         </li>
     </ul>
     <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="(item,index) in cards" :key="index">
+        <div class="swiper-wrapper" >
+            <div class="swiper-slide" v-for="(item,index) in cards" :key="index" @touchend="change(index)">
                <p>
                 <span :class=item.icon></span>
                </p>
@@ -32,6 +32,7 @@ let home = {
     template: html,
     data() {
         return {
+            backColor: ['lightskyblue', 'lightsalmon'],
             user: {
                 name: 'shauxin',
                 about: 'keep passion'
@@ -56,7 +57,14 @@ let home = {
     mounted() {
         var mySwiper = new Swiper('.swiper-container', {
             // 选项配置
-            // loop: true
+            // loop: true  //开启循环
         })
+    },
+    methods: {
+        change(index) {
+            let i = index % 2;
+            this.$refs.target.style.backgroundColor = this.backColor[i];
+        }
     }
+
 }
