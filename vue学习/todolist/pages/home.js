@@ -56,10 +56,9 @@ let home = {
     },
     methods: {
         go() {
-            router.push({
-                path: '/detail',
-                component: detail
-            })
+           router.push(
+                '/detail'
+            )
         }
     },
     mounted() {

@@ -31,7 +31,6 @@
     <script src="https://cdn.bootcss.com/vue/2.6.10/vue.common.dev.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script>
-
         // 定义页面组件
         const One = {
             template: '<div>one</div>',
@@ -94,7 +93,10 @@
                 go() {
                     // 编程导航
                     // router.push({ path: '/demo', component: Demo })
-                    router.replace({ path: '/demo', component: Demo });
+                    router.replace({
+                        path: '/demo',
+                        component: Demo
+                    });
                 }
             }
         }).$mount('#app')
