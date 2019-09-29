@@ -16,7 +16,7 @@ let html = `
     </ul>
     <div class="swiper-container">
         <div class="swiper-wrapper" >
-            <div class="swiper-slide" v-for="(item,index) in cards" :key="index" @touchend="change(index)">
+            <div ref="slide" class="swiper-slide" v-for="(item,index) in cards" :key="index" >
                <p>
                 <span :class=item.icon></span>
                </p>
@@ -32,7 +32,7 @@ let home = {
     template: html,
     data() {
         return {
-            backColor: ['lightskyblue', 'lightsalmon'],
+            backColor: ['lightsalmon','lightskyblue', 'lightsalmon'],
             user: {
                 name: 'shauxin',
                 about: 'keep passion'
@@ -55,16 +55,17 @@ let home = {
         }
     },
     mounted() {
+        let that=this;
         var mySwiper = new Swiper('.swiper-container', {
             // 选项配置
             // loop: true  //开启循环
+            on: {
+                // swiper 当切换到下一页时 执行该函数
+                slideChangeTransitionEnd: function () {
+                    console.log(this.activeIndex);
+                    that.$refs.target.style.backgroundColor = that.backColor[this.activeIndex];
+                },
+            },
         })
-    },
-    methods: {
-        change(index) {
-            let i = index % 2;
-            this.$refs.target.style.backgroundColor = this.backColor[i];
-        }
     }
-
 }
