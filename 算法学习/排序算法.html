@@ -163,25 +163,6 @@
             }
             // 4.希尔排序
             ArrayList.prototype.shellsort = function () {
-                console.time('希尔排序');
-                // 定义间隔
-                let gap = parseInt(this.items.length / 2);
-                let length = this.items.length;
-                while (gap >= 1) {
-                    for (let i = 0; i < length; i++) {
-                        for (let j = i + gap; j < length; j++) {
-                            if (this.items[j] > this.items[j + gap]) {
-                                let tmp = this.items[j];
-                                this.items[j] = this.items[j + gap];
-                                this.items[j + gap] = tmp;
-                            }
-                        };
-                    }
-                    gap /= 2;
-                }
-                console.timeEnd('希尔排序');
-            }
-            ArrayList.prototype.shellsort2 = function () {
                 console.time('希尔排序2');
                 let length = this.items.length;
                 let gap = Math.floor(length / 2);
