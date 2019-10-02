@@ -185,28 +185,76 @@
             // 5.1选择枢纽
             ArrayList.prototype.media = function (left, right) {
                 // 1.取中间值
-                let center = Math.floor((left + right - 1) / 2);
+                let center = parseInt((left + right) / 2);
                 // 2.判断大小 并交换位置 
                 if (this.items[left] > this.items[center]) {
-                    this.swap(left, center);
-                } else if (this.items[center] > this.items[right]) {
-                    this.swap(center, right);
+                    if (this.items[left] > this.items[right]) {
+                        this.swap(left, right);
+                    } else {
+                        this.swap(left, center);
+                    }
+                } else {
+                    if (this.items[center] > this.items[right]) {
+                        this.swap(center, right);
+                    }
                 }
+                // 3.将center转到right-1的位置
+                // this.swap(center, right - 1);
+                console.log(this.items);
+                // 返回值
+                return this.items[right - 1];
+            }
+            // 5.2 递归
+            ArrayList.prototype.quick = function (left, right) {
+                if (left >= right) {
+                    return;
+                }
+                // 取枢纽的坐标
+                let pivot = this.media(left, right);
+                // 控制循环
+                let i = left,
+                    j = right;
+                while (true) {
+                    while (this.items[i] < pivot) {
+                        i++;
+                    }
+                    while (this.items[j] > pivot) {
+                        j--;
+                    }
+                    if (i < j) {
+                        this.swap(i, j);
+                        i++;
+                        j--;
+                    } else {
+                        break;
+                    }
+                }
+                // 找到枢纽位置
+                this.swap(i, right - 1);
+                this.quick(left, i - 1);
+                this.quick(i + 1, right);
+            }
+            // 5.3 对外提供的快速排序
+            ArrayList.prototype.quicksort = function () {
+                this.quick(0, this.items.length - 1);
             }
         }
         // 测试代码
         let a = new ArrayList();
-        for (let i = 50; i > 0; i--) {
-            a.insert(i);
+        for (let i = 0; i < 20; i++) {
+            a.insert(parseInt(Math.random() * 100));
         }
+
+
+
         console.log(a.toString());
         // a.bubblesort();
         // a.selectionsort();
         // a.insertingsort();
         // a.shellsort();
         // a.shellsort2();
-        a.media(0, a.items.length);
-        // console.log(a.toString());
+        a.quicksort();
+        console.log(a.toString());
     </script>
 </body>
 
