@@ -5,12 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>路由学习</title>
+    <style>
+        .app {
+            width: 50vw;
+            height: 25vw;
+            background-color: lightgray;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
 </head>
 
 
 <body>
-    <div id="app">
+    <div id="app" class="app">
         <!-- 页面跳转 -->
         <button @click="go">编程导航</button>
         <router-link to='/one'>
@@ -28,8 +37,8 @@
         </div>
 
     </div>
-    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.common.dev.js"></script>
-    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/vue-router.js"></script>
     <script>
         // 定义页面组件
         const One = {
@@ -45,7 +54,7 @@
             }
         };
         const User = {
-            template: '<div>user{{ $route.params.id }}</div>'
+            template: '<div>user {{ $route.params.id }}</div>'
         }
         const Not = {
             template: '<div>404</div>'
@@ -54,8 +63,7 @@
             template: '<div>demo</div>'
         }
         // 配置路由
-        const routes = [
-            {
+        const routes = [{
                 path: '/one',
                 component: One
             },
