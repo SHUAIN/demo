@@ -200,7 +200,6 @@
                 }
                 // 3.将center转到right-1的位置
                 // this.swap(center, right - 1);
-                console.log(this.items);
                 // 返回值
                 return this.items[right - 1];
             }
@@ -236,24 +235,23 @@
             }
             // 5.3 对外提供的快速排序
             ArrayList.prototype.quicksort = function () {
+                console.time('快速排序');
                 this.quick(0, this.items.length - 1);
+                console.timeEnd('快速排序');
             }
         }
         // 测试代码
         let a = new ArrayList();
-        for (let i = 0; i < 20; i++) {
-            a.insert(parseInt(Math.random() * 100));
+        // 随机插入数 进行排序
+        for (let i = 0; i < 500; i++) {
+            a.insert(1+parseInt(Math.random() * 1000));
         }
-
-
-
         console.log(a.toString());
         // a.bubblesort();
         // a.selectionsort();
         // a.insertingsort();
         // a.shellsort();
-        // a.shellsort2();
-        a.quicksort();
+        // a.quicksort();
         console.log(a.toString());
     </script>
 </body>
