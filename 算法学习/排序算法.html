@@ -214,12 +214,15 @@
                 let i = left,
                     j = right;
                 while (true) {
+                    // 确保枢纽左边都是比他小的
                     while (this.items[i] < pivot) {
                         i++;
                     }
+                    // 确保枢纽左边都是比他大的
                     while (this.items[j] > pivot) {
                         j--;
                     }
+                    // 这里进行两边的对比交换
                     if (i < j) {
                         this.swap(i, j);
                         i++;
@@ -243,15 +246,15 @@
         // 测试代码
         let a = new ArrayList();
         // 随机插入数 进行排序
-        for (let i = 0; i < 500; i++) {
-            a.insert(1+parseInt(Math.random() * 1000));
+        for (let i = 0; i < 20; i++) {
+            a.insert(1 + parseInt(Math.random() * 100));
         }
         console.log(a.toString());
         // a.bubblesort();
         // a.selectionsort();
         // a.insertingsort();
         // a.shellsort();
-        // a.quicksort();
+        a.quicksort();
         console.log(a.toString());
     </script>
 </body>
