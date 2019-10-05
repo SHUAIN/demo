@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>响应式系统原理</title>
+    <link rel="stylesheet" href="../vue学习/css/common.css">
+</head>
+
+<body>
+    <div class="app">
+        <div>
+            <h3>Object.defineProperty(object, propertyname, descriptor)</h3>
+            <ul>
+                <li>作用：为一个对象添加一个属性，并对该属性进行一些操作</li>
+                <li>参数说明：1.要操作的对象，2.要添加的属性key，3.修饰对象</li>
+                <li>
+                    <span style="color:white">修饰对象属性</span style="color:lightgreen">
+                    <ul>
+                        <li> 1.value给该属性赋值</li>
+                        <li> 2.writeable配置该属性是否可写(true,false)默认为false</li>
+                        <li>12(数据描述符)和56 (存储描述符)不能共存</li>
+                        <li> 3.configurable配置该属性是否可以被删除,默认为true</li>
+                        <li> 4.enumerable配置该属性是否可以被循环,默认为true</li>
+                        <li> 5.get一旦访问该属性就会调用</li>
+                        <li> 6.set一旦设置该属性就会调用</li>
+                    </ul>
+                </li>
+                <li>作用：mvvm框架的响应式实现</li>
+            </ul>
+        </div>
+        <div id="app">
+
+        </div>
+    </div>
+    <script>
+        // 对实例属性对象的属性进行拦截
+        function intercept(obj, prop) {
+            Object.defineProperty(obj, prop, {
+                get() {
+                    return obj[`_${prop}`];
+                },
+                set(newVal) {
+                    if (newVal!=obj[`_${prop}`]) {
+                        obj[`_${prop}`]=newVal;
+                    }
+                }
+            });
+        }
+        // 检查每一个实例属性类型
+        function observer(obj) {
+            if (typeof obj == 'object') {
+                Object.keys(obj).forEach(
+                    (e) => {
+                        obj[`_${e}`] = obj[e];
+                        intercept(obj, e);
+                    }
+                );
+            }
+        }
+        class myVue {
+            // 动态初始化实例属性
+            constructor(option) {
+                Object.keys(option).forEach(
+                    (e) => {
+                        this[`_${e}`] = option[e];
+                        observer(option[e]);
+                        intercept(this, e);
+                    }
+                );
+            }
+        }
+        let app = new myVue({
+            el: '#app',
+            data: {
+                name: 'myvue'
+            }
+        })
+        console.log(app.data.name);
+        app.data.name='vue';
+        console.log(app.data.name);
+        
+    </script>
+</body>
+
+</html>
