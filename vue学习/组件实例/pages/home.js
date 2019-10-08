@@ -76,7 +76,6 @@ let home = {
                     console.log(this.activeIndex);
                 },
             },
-
         })
     }
 }
