@@ -1,161 +1,128 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8" />
-		<title>lightbox</title>
-		<style type="text/css">
-			body,
-			ul {
-				margin: 0;
-			}
-			
-			ul {
-				padding-left: 0;
-				list-style: none;
-				width: 800px;
-				margin: 0 auto;
-				text-align: center;
-			}
-			
-			li>img {
-				width: 200px;
-				height: 153px;
-				transition: all 0.3s;
-			}
-			
-			li>img:hover {
-				box-shadow: 0px 10px 25px -5px gray;
-			}
-			
-			ul li {
-				display: inline-block;
-				margin: 0 10px;
-			}
-			
-			ul li:hover {
-				cursor: pointer;
-			}
-			.box>div {
-				width: 100%;
-				height: 100%;
-				text-align: center;
-				background-color: rgba(128, 128, 128, 0.62);
-				position: absolute;
-				top: 0;
-			}
-			
-			div>span {
-				cursor: pointer;
-				font-size: 50px;
-			}
-		</style>
-	</head>
+<head>
+	<meta charset="utf-8" />
+	<title>lightbox</title>
+	<style type="text/css">
+		body,
+		ul {
+			margin: 0;
+		}
 
-	<body>
-		<ul>
-			<h1>lightbox</h1>
-			<li><img id="1" src="img/01.jpg" alt="" /></li>
-			<li><img id="2" src="img/02.jpg" alt="" /></li>
-			<li><img id="3" src="img/03.jpg" alt="" /></li>
-		</ul>
-		<div class="box">
-			<div id="one" style="display: none;">
-				<span id="1">×</span>
-				<br />
-				<img src="img/01.jpg" />
-			</div>
-			<div id="two" style="display: none;">
-				<span id="2">×</span>
-				<br />
-				<img src="img/02.jpg" />
-			</div>
-			<div id="three" style="display: none;">
-				<span id="3">×</span>
-				<br />
-				<img src="img/03.jpg" />
-			</div>
+		ul {
+			padding-left: 0;
+			list-style: none;
+			width: 800px;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		li>img {
+			width: 200px;
+			height: 153px;
+			transition: all 0.3s;
+		}
+
+		li>img:hover {
+			box-shadow: 0px 10px 25px -5px gray;
+		}
+
+		ul li {
+			display: inline-block;
+			margin: 0 10px;
+		}
+
+		ul li:hover {
+			cursor: pointer;
+		}
+
+		.box>div {
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			background-color: rgba(128, 128, 128, 0.62);
+			position: absolute;
+			top: 0;
+		}
+
+		div>span {
+			cursor: pointer;
+			font-size: 50px;
+		}
+	</style>
+</head>
+
+<body>
+	<ul>
+		<h1>lightbox</h1>
+		<li><img id="1" src="img/01.jpg" alt="" /></li>
+		<li><img id="2" src="img/02.jpg" alt="" /></li>
+		<li><img id="3" src="img/03.jpg" alt="" /></li>
+	</ul>
+	<div class="box">
+		<div id="one" style="display: none;">
+			<span id="1">×</span>
+			<br />
+			<img src="img/01.jpg" />
 		</div>
-	</body>
-	<script type="text/javascript">
-		//		var img0 = document.getElementsByTagName('img')[0];
-		//		var img1 = document.getElementsByTagName('img')[1];
-		//		var img2 = document.getElementsByTagName('img')[2];
-		//		//		显示函数
-		//		function show(find) {
-		//			document.getElementById(find).style.display = 'block';
-		//		}
-		//		img0.onclick = function() {
-		//			show('one');
-		//		}
-		//		img1.onclick = function() {
-		//			show('two');
-		//		}
-		//		img2.onclick = function() {
-		//			show('three');
-		//		}
-		//		显示优化
+		<div id="two" style="display: none;">
+			<span id="2">×</span>
+			<br />
+			<img src="img/02.jpg" />
+		</div>
+		<div id="three" style="display: none;">
+			<span id="3">×</span>
+			<br />
+			<img src="img/03.jpg" />
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	var ul = document.querySelector('ul');
+	ul.addEventListener('click', show);
 
-		var ul = document.querySelector('ul');
-		ul.addEventListener('click', show);
+	function show(ev) {
 
-		function show(ev) {
-
-			//			获取当前点击元素的id
-			console.log(ev.target.id);
-			var index = ev.target.id;
-			switch(parseInt(index)) {
-				case 1:
-					document.getElementById('one').style.display = 'block';
-					break;
-				case 2:
-					document.getElementById('two').style.display = 'block';
-					break;
-				case 3:
-					document.getElementById('three').style.display = 'block';
-					break;
-				default:
-					break;
-			}
-
+		//			获取当前点击元素的id
+		console.log(ev.target.id);
+		var index = ev.target.id;
+		switch (parseInt(index)) {
+			case 1:
+				document.getElementById('one').style.display = 'block';
+				break;
+			case 2:
+				document.getElementById('two').style.display = 'block';
+				break;
+			case 3:
+				document.getElementById('three').style.display = 'block';
+				break;
+			default:
+				break;
 		}
 
-		//		取消函数
-		//		function cancel(find) {
-		//			document.getElementById(find).style.display = 'none';
-		//		}
-		//		var s1 = document.getElementById('1');
-		//		var s2 = document.getElementById('2');
-		//		var s3 = document.getElementById('3');
-		//		s1.onclick = function() {
-		//			cancel('one');
-		//		}
-		//		s2.onclick = function() {
-		//			cancel('two');
-		//		}
-		//		s3.onclick = function() {
-		//			cancel('three');
-		//		}
-		//		取消优化
-		var box = document.querySelector('.box');
-		box.addEventListener('click', cancel);
+	}
 
-		function cancel(ev) {
-			var index = ev.target.id;
-			switch(parseInt(index)) {
-				case 1:
-					document.getElementById('one').style.display = 'none';
-					break;
-				case 2:
-					document.getElementById('two').style.display = 'none';
-					break;
-				case 3:
-					document.getElementById('three').style.display = 'none';
-					break;
-				default:
-					break;
-			}
+	//		取消优化
+	var box = document.querySelector('.box');
+	box.addEventListener('click', cancel);
+
+	function cancel(ev) {
+		var index = ev.target.id;
+		switch (parseInt(index)) {
+			case 1:
+				document.getElementById('one').style.display = 'none';
+				break;
+			case 2:
+				document.getElementById('two').style.display = 'none';
+				break;
+			case 3:
+				document.getElementById('three').style.display = 'none';
+				break;
+			default:
+				break;
 		}
-	</script>
+	}
+</script>
 
 </html>

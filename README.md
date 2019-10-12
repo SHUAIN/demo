@@ -27,6 +27,13 @@
 
 
 >js练习项目----------练习js的小demo
+-   对原生js创建dom封装的函数
+-   js做的日历
+-   搜索框提示
+-   用js做的生成验证码
+-   lightbox
+-   用时间来控制页面的颜色
+
 
 >vue学习-------------vue学习笔记+小demo
 - [vue基础学习1](https://shuaxindiary.github.io/2019/09/03/vuejs%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0-1/)
