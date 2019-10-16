@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function List(val) {
+            this.val = val;
+            this.next = null;
+        }
+        let a=new List(1);
+        let b=a;
+        a.next=new List(2);
+
+        console.log(a);
+        console.log(b);
+        // (function init() {
+        //     let n = new List(0);
+        //     let root = n;
+        //     let index=0;
+        //     while(index!=3){
+        //         n.next=new List(index);
+        //         n=n.next;
+        //         index++;
+        //     }
+        //     console.log(n);
+        //     console.log(root);
+        // })();
+    </script>
+</body>
+
+</html>

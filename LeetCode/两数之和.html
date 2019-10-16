@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>两数之和</title>
+    <style>
+        div {
+            width: 50vw;
+            margin: 0 auto;
+            ;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
+        <hr>
+        如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
+        <hr>
+        您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+        <hr>
+        示例：
+        <hr>
+        输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
+        <hr>
+        输出：7 -> 0 -> 8
+        <hr>
+        原因：342 + 465 = 807
+    </div>
+
+    <script>
+        /**
+         * @param {number[]} nums
+         * @param {number} target
+         * @return {number[]}
+         */
+        var twoSum = function (nums, target) {
+            let res = [];
+            // 选择排序的循环来做
+            for (let i = 0; i < nums.length - 1; i++) {
+                for (let j = i + 1; j < nums.length; j++) {
+                    if (nums[i] + nums[j] == target) {
+                        res.push(i);
+                        res.push(j);
+                        break;
+                    }
+                }
+                if (res.length === 2) {
+                    break;
+                }
+            }
+            return res
+        };
+    </script>
+</body>
+
+</html>
