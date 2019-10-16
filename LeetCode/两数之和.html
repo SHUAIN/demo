@@ -10,7 +10,6 @@
         div {
             width: 50vw;
             margin: 0 auto;
-            ;
         }
     </style>
 </head>
@@ -39,16 +38,20 @@
          * @return {number[]}
          */
         var twoSum = function (nums, target) {
+            // 保存返回的结果
             let res = [];
             // 选择排序的循环来做
             for (let i = 0; i < nums.length - 1; i++) {
                 for (let j = i + 1; j < nums.length; j++) {
+                    // 满足条件
                     if (nums[i] + nums[j] == target) {
+                        // 将这两个数装进数组 并结束循环
                         res.push(i);
                         res.push(j);
                         break;
                     }
                 }
+                // 当返回结果中有2个数后结束循环
                 if (res.length === 2) {
                     break;
                 }
