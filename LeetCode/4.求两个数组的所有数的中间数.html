@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 解法1
+        let findMedianSortedArrays = function (num1, num2) {
+            // 合并数组
+            let arr = num1.concat(num2);
+            let len = arr.length,
+                temp = 0;;
+            // 对合并后数组进行排序
+            for (let i = 0; i < len - 1; i++) {
+                for (let j = i + 1; j < len; j++) {
+                    if (arr[i] > arr[j]) {
+                        tmp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = tmp;
+                    }
+                }
+            }
+            if (len % 2 === 0) {
+                let index = parseInt(len / 2 - 1);
+                return ((arr[parseInt(len / 2 - 1)] + arr[parseInt(len / 2)]) / 2);
+            } else {
+                let index = parseInt(len / 2);
+                return arr[index];
+            }
+        }
+        // 解法2
+        let findMedianSortedArrays2=(nums1,nums2)=>{
+            let i=0,j=0,len=nums1.length+nums2.length;
+            
+        }
+    </script>
+</body>
+
+</html>
