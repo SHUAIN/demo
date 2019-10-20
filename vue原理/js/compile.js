@@ -22,7 +22,6 @@ class Compile {
     isDirective(name) {
         // des:判断是不是指令  返回布尔值  ES6方法
         return name.includes('s-');
-
     }
     // 核心方法
     node2fragment(el) {
