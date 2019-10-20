@@ -1,3 +1,4 @@
+// des:对挂载模板内部的所有dom进行判断是否有指令或者表达式，然后做对应的处理，最后渲染到页面
 class Compile {
     // @param {el:String/DOM}
     // @param {vm:Object}
@@ -103,18 +104,32 @@ CompileUtil = {
             return prev[next];
         }, vm.$data);
     },
+    getTextVal(vm, value) {
+        return value.replace(/\{\{(.*)\}\}/, (...rest) => {
+            return this.getVal(vm, rest[1]);
+        });
+    },
     text(node, vm, value) {
         // des:文本处理
         let updateFn = this.updater['textUpdater'];
         // 文本替换  将文本节点的表达式替换成实例data的数据
-        let val = value = value.replace(/\{\{(.*)\}\}/, (...rest) => {
-            return this.getVal(vm, rest[1]);
+        let val = this.getTextVal(vm, value);
+        value.replace(/\{\{(.*)\}\}/, (...rest) => {
+            // 数据变化了 文本节点需要重新获取值
+            new Watcher(vm, rest[1], (newVal) => {
+                updateFn && updateFn(node, this.getTextVal(vm, value));
+            })
         });
         updateFn && updateFn(node, val);
     },
     model(node, vm, value) {
         // des:v-model处理
         let updateFn = this.updater['modelUpdater'];
+        // 添加监控数据 当数据变化时调用回调 重新渲染
+        new Watcher(vm, value, (newVal) => {
+            // 值发生变化后 调用回调 
+            updateFn && updateFn(node, this.getVal(vm, value));
+        })
         // 确定调用的函数存在 在执行
         updateFn && updateFn(node, this.getVal(vm, value));
     },
