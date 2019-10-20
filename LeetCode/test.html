@@ -10,28 +10,34 @@
 
 <body>
     <script>
-        function List(val) {
-            this.val = val;
-            this.next = null;
+        let expandAroundCenter = (left, right, s) => {
+            let L = left,
+                R = right;
+            while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+                L--;
+                R++;
+            }
+            return R - L - 1;
         }
-        let a=new List(1);
-        let b=a;
-        a.next=new List(2);
-
-        console.log(a);
-        console.log(b);
-        // (function init() {
-        //     let n = new List(0);
-        //     let root = n;
-        //     let index=0;
-        //     while(index!=3){
-        //         n.next=new List(index);
-        //         n=n.next;
-        //         index++;
-        //     }
-        //     console.log(n);
-        //     console.log(root);
-        // })();
+        let check = (s) => {
+            let len = s.length;
+            if (s == null || len < 1) return "";
+            let start = 0,
+                end = 0;
+            for (let i = 0; i < len; i++) {
+                let len1 = expandAroundCenter(s, i, i);
+                let len2 = expandAroundCenter(s, i, i + 1);
+                let len = Math.max(len1, len2);
+                if (len > end - start) {
+                    start = i - (len - 1) / 2;
+                    end = i + len / 2;
+                }
+            }
+            return s.substring(start, end + 1);
+        };
+        console.time('ok');
+        console.log(check('ababd'));
+        console.timeEnd('ok');
     </script>
 </body>
 
