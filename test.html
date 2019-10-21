@@ -9,16 +9,18 @@
 </head>
 
 <body>
-    <div id="app">
-        <p>1</p>
-        <p>2</p>
-        <p>3</p>
-    </div>
     <script>
-        let data = [1, 2, 3];
-        data.reduce((prev, next) => {
-            console.log(next);
-        }, data);
+        let arr = [1, 2, 3];
+        // let brr=arr.forEach((e) => {
+        //    return e += 1
+        // })
+        // let brr=arr.map((e)=>{
+        //     return e+1;
+        // });
+        let sum = arr.reduce((a, b) => {
+            return a += b;F
+        });
+        console.log(sum);
     </script>
 </body>
 
