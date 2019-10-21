@@ -35,12 +35,6 @@
 -   用时间来控制页面的颜色
 -   井字棋
 
-
->vue学习-------------vue学习笔记+小demo
-- [vue基础学习1](https://shuaxindiary.github.io/2019/09/03/vuejs%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0-1/)
-- [vue基础学习2](https://shuaxindiary.github.io/2019/09/26/vuejs%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0-2/)
-- [vue基础学习3](https://shuaxindiary.github.io/2019/10/06/vuejs%E5%9F%BA%E7%A1%80%E5%A4%8D%E4%B9%A0-3/)
-
 >数据结构文件整理-----学习数据结构时实现的常用结构，为了方便使用，提取出来。
 
 >leetCode-----leetCode刷题记录
