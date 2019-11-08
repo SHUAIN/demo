@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0%;
+            overflow: hidden;
+        }
+
+        .parent {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .one>div,
+        .two>div {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            background-color: lightgray;
+            z-index: 9;
+            transition: all 1s;
+        }
+
+        .one,
+        .two {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .after {
+            width: 100vw !important;
+            height: 100vh !important;
+            line-height: 100vh !important;
+            position: absolute;
+            top: 0;
+            background-color: lightgray;
+            text-align: center;
+            z-index: -9;
+            /* transition: all 1s; */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent" id="parent">
+        <div class="one" id="one">
+            <div class="one-son">1</div>
+            <div class="one-son">2</div>
+            <div class="one-son">3</div>
+        </div>
+        <div class="two-son after">1</div>
+        <div class="two-son after">2</div>
+        <div class="two-son after">3</div>
+    </div>
+    <script src="./demo.js"></script>
+</body>
+
+</html>
