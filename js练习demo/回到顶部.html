@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .con {
+            width: 100vw;
+            height: 1100vh;
+            background-color: lightcoral;
+        }
+
+        .float {
+            padding: 0;
+            margin: 0;
+            position: fixed;
+            top: 70vh;
+            right: 5vw;
+            opacity: 0;
+            z-index: 0;
+            transition: all 0.5s;
+        }
+
+        li {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            list-style: none;
+            background-color: #ffffff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="con" id="con">
+
+    </div>
+    <ul class="float" id="float">
+        <li id="backtop">BACK</li>
+    </ul>
+    <script>
+        let con = document.querySelector('#con');
+        let float = document.querySelector('#float');
+        let backtop = document.querySelector('#backtop');
+        let set = function (op, zi) {
+            float.style.opacity = op;
+            float.style.zIndex = zi;
+        }
+        backtop.addEventListener('click', function () {
+            // 设置滚动条滚动了的高度为0  回到页面顶部
+            // document.documentElement.scrollTop = 0;
+            scrollTo(0, 0);
+            set(0, 0);
+        });
+        con.addEventListener('wheel', function () {
+            // 获取可视区域宽高
+            let viewHeight = document.documentElement.clientHeight;
+            // 获取已经滚动条滚动了的高度
+            let scrowHeight = document.documentElement.scrollTop;
+            // 获取文档高
+            let documentHeight = document.body.clientHeight;
+            if (scrowHeight === 0) {
+                // 隐藏按钮
+                set(0, 0);
+            } else {
+                // 显示按钮
+                set(10, 99);
+            }
+        });
+    </script>
+</body>
+
+</html>
