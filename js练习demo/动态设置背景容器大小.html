@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        .banner {
+            width: 100vw;
+            max-height: 520px;
+            max-width: 1920px;
+            background: url('./banner1.png') no-repeat;
+            background-position: center top;
+            background-size: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner" id="banner">
+    </div>
+    <script>
+        // 1.通过固定宽度 根据图片比例动态设置适合的高
+        let changeH = function () {
+            let banner = document.querySelector('#banner');
+            // 获取banner的宽度
+            let width = banner.clientWidth;
+            let prop = parseInt(1920 / 520);
+            let height = parseInt(width / prop);
+            banner.style.height = height + 'px';
+            console.log(banner.style.height);
+        };
+        let init = function () {
+            changeH();
+        };
+        init();
+        window.onresize = function () {
+            changeH();
+        }
+    </script>
+</body>
+
+</html>
