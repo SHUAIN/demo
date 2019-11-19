@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>进度</title>
+    <style>
+        body {
+            margin: 0 auto;
+            padding: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .con {
+            width: 100vw;
+            height: 1000vh;
+            background-color: lightblue;
+        }
+
+        .top {
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            height: 5px;
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top" id="top"></div>
+    <div class="con" id="con"></div>
+    <script>
+        let slip = document.querySelector('#top');
+        let con = document.querySelector('#con');
+        let viewHeight = document.documentElement.clientHeight;
+        // 获取当前屏宽
+        let slipWidth = slip.clientWidth;
+        // 获取文档总长
+        let documentHeight = document.body.clientHeight;
+        // (文档总长-屏幕可视窗口height)/当前屏width
+        let prop = slipWidth / (documentHeight - viewHeight);
+        // 初始化 让top宽度变为0
+        slip.style.width = 0;
+        // 设置宽度
+        let setWith = (dom, h) => {
+            dom.style.width = `${h}px`;
+            dom.style.transition = "width 0.5s";
+        };
+        window.addEventListener("scroll", () => {
+            // 实时获取滑动的高度
+            let scroHeight = document.documentElement.scrollTop;
+            setWith(slip, scroHeight * prop);
+        });
+    </script>
+</body>
+
+</html>
