@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>防抖</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .banner {
+            width: 100vw;
+            max-height: 520px;
+            max-width: 1920px;
+            background: url('./banner.png') no-repeat;
+            background-size: contain;
+            background-position: center top;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner" id="banner">
+    </div>
+    <script>
+        // 动态设置容器大小
+        let changeH = function () {
+            let banner = document.querySelector('#banner');
+            // 获取banner的宽度
+            let width = banner.clientWidth;
+            let prop = parseInt(1920 / 520);
+            let height = parseInt(width / prop);
+            banner.style.height = height + 'px';
+            console.log(banner.style.height);
+        };
+        // 初始化容器大小
+        let init = function () {
+            changeH();
+        };
+        init();
+        // 保存定时器
+        let timeout = null;
+        // 防抖函数 
+        let debounce = function (fun,wait) {
+            // 清除上次保存的定时器
+            clearTimeout(timeout);
+            // 创建新定时器 并保存
+            timeout = setTimeout(() => {
+                fun();
+            }, wait);
+        }
+        // 监听窗口变化事件
+        window.addEventListener('resize', () => {
+            debounce(changeH,1000);
+        });
+    </script>
+</body>
+
+</html>

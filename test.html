@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">click</button>
+    <script>
+        let btn = document.querySelector('#btn');
+        let timer = setTimeout(() => {
+            console.log('init')
+        }, 500);
+        btn.addEventListener('click', () => {
+            console.log(`before${timer}`);
+            timer=null;
+            console.log(`after${timer}`);
+
+        });
+    </script>
+</body>
+
+</html>
