@@ -9,18 +9,22 @@
 </head>
 
 <body>
-    <button id="btn">click</button>
     <script>
-        let btn = document.querySelector('#btn');
-        let timer = setTimeout(() => {
-            console.log('init')
-        }, 500);
-        btn.addEventListener('click', () => {
-            console.log(`before${timer}`);
-            timer=null;
-            console.log(`after${timer}`);
-
-        });
+        let sad = function () {
+            console.log('sad');
+            return true;
+        };
+        let stop = function () {
+            console.log('stop');
+        };
+        let beAwesome = function () {
+            console.log('beAwesome');
+        };
+        sad().__proto__.stop = stop;
+        if (sad() === true) {
+            sad().stop();
+            beAwesome();
+        }
     </script>
 </body>
 
