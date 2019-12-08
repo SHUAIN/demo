@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首页</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/logo.ico" media="screen" />
+    <link rel="stylesheet" href="./assets/swiper.min.css">
+    <link rel="stylesheet" href="./assets/normalize.css">
+    <link rel="stylesheet" href="./assets/animate.css">
+    <link rel="stylesheet" href="./style/home.css">
+</head>
+
+<body>
+    <!-- 欢迎页面 -->
+    <div class="cover " id="cover"></div>
+    <!-- 轮播 -->
+    <div class=" container" id="container">
+        <div class="menu" id="menu">MENU</div>
+        <div class="tittle">
+            <!-- 导航 -->
+            <ul class="nav" id="nav">
+                <li>
+                    <a href="home.html" title="首页">HOME</a>
+                </li>
+                <li>
+                    <a href="films.html" title="电影">MOVIE</a>
+                </li>
+                <li>
+                    <a href="about.html" title="关于">ABOUT</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 轮播 -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img width="100%;height:90%" src="./img/Home/all.jpg" alt="钢铁侠">
+                </div>
+                <div class="swiper-slide">
+                    <img width="100%;height:90%" src="./img/Home/iromman.jpg" alt="钢铁侠">
+                </div>
+                <div class="swiper-slide">
+                    <img width="100%;height:90%" src="./img/Home/captain.jpg" alt="美队">
+                </div>
+                <div class="swiper-slide">
+                    <img width="100%;height:90%" src="./img/Home/heiguafu.jpg" alt="黑寡妇">
+                </div>
+                <div class="swiper-slide">
+                    <img width="100%;height:90%" src="./img/Home/yingyan.jpg" alt="鹰眼">
+                </div>
+                <div class="swiper-slide">
+                    <img width="100%;height:90%" src="./img/Home/hulk.jpg" alt="绿巨人">
+                </div>
+                <div class="swiper-slide">
+                    <img width="100%;height:90%" src="./img/Home/thor2.jpg" alt="雷蛇">
+                </div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination"></div>
+
+            <!-- 如果需要导航按钮 -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+    <script src="./assets/swiper.min.js"></script>
+    <script src="./js/home.js"></script>
+</body>
+
+</html>

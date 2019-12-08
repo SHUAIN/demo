@@ -9,22 +9,28 @@
 </head>
 
 <body>
+    <button id="btn">请求</button>
     <script>
-        let sad = function () {
-            console.log('sad');
-            return true;
-        };
-        let stop = function () {
-            console.log('stop');
-        };
-        let beAwesome = function () {
-            console.log('beAwesome');
-        };
-        sad().__proto__.stop = stop;
-        if (sad() === true) {
-            sad().stop();
-            beAwesome();
+        let btn = document.querySelector('#btn');
+        let getData = function (key) {
+            let url=`https://api.seniverse.com/v3/weather/now.json?key=${key}&location=beijing&language=zh-Hans&unit=c`;
+            fetch(url,{
+                method:'GET'
+            })
+                .then(
+                    (res) => {
+                        return res.json();
+                    }
+                )
+                .then(
+                    (data) => {
+                        console.log(data);
+                    }
+                )
         }
+        btn.addEventListener('click', () => {
+            getData("SgLx7kTwN4_94MIAt");
+        });
     </script>
 </body>
 

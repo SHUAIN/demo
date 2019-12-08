@@ -1,0 +1,125 @@
+/* 回到顶部 */
+.float{
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+    cursor: pointer;
+    font-size: 20px;
+}
+/* 重置默认样式 */
+body {
+    width: 100vw;
+    background-color: #f2f2f3;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+    overflow-x: hidden;
+}
+button{
+    outline: none;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* 导航样式 */
+.nav {
+    width: 100vw;
+    height: 100px;
+    line-height: 100px;
+    display: flex;
+    background: url('../img/logo.png') no-repeat, #ffffff;
+    background-position: 5% center;
+    background-size: 40px 44px;
+}
+
+.nav li {
+    height: 100%;
+    margin-left: 15%;
+}
+
+.nav a {
+    color: #000000;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+/* 留言板 */
+.write {
+    padding: 1% 0;
+    width: 500px;
+    height: 200px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin: 0 auto;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+textarea {
+    background-color: #f2f2f3;
+    padding: 10px;
+    width: 85%;
+    height: 100px !important;
+    outline: none;
+    border: none;
+    /* 关闭手动改变大小 */
+    resize: none;
+    color: #BCBCBC;
+}
+
+.enter {
+    width: 120px;
+    height: 50px;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    color: #ffffff;
+    background-color: #4790E5;
+    border-radius: 30px;
+    transition: box-shadow 0.5s;
+}
+
+.enter:hover {
+    box-shadow: 0px 7px 20px #4690d485;
+}
+
+/* 留言展示 */
+.list {
+    width: 500px;
+    padding-bottom: 1%;
+    margin: 5% auto;
+    background-color: #ffffff;
+}
+
+.list>div {
+    padding-top: 1%;
+}
+
+.list div h3 {
+    text-indent: 1rem;
+}
+
+.list div p {
+    text-indent: 2rem;
+    overflow: hidden;
+}
+.reply{
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    color: #BCBCBC;
+    font-size: 15px;
+    float: right;
+    margin-right: 5%;
+}
