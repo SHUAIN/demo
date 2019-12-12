@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绘制长方形</title>
+    <style>
+        #can {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="can" width="300" height="300"></canvas>
+    <script>
+        /** @type {HTMLCanvasElement} */
+        let draw = {
+            color: '#fff',
+            lineCaps: ["butt", "round", "square"],
+            // 判断描边还是填充
+            changeStyle(ctx, style) {
+                if (style === 'stroke') {
+                    // 设置描边样式
+                    ctx.strokeStyle = this.color;
+                    ctx.stroke();
+                } else if (style === 'fill') {
+                    // 设置填充样式
+                    ctx.fillStyle = this.color;
+                    ctx.fill();
+                } else {
+                    console.error('绘制类型只能是stroke、fill');
+                }
+            },
+            // 画直线
+            line(ctx) {
+                // 创建起始路径
+                ctx.beginPath();
+                // 移动画笔 x,y(起点)
+                ctx.moveTo(100, 100);
+                // 移动画笔从上面的位置到一个新位置 x,y(终点)
+                ctx.lineTo(200, 200);
+                ctx.lineWidth = 15;
+                // 设置线段末端以什么样子结束[方形、圆形、特殊方形]  当设置闭合路径后 该效果不不起作用
+                ctx.lineCap = this.lineCaps[1];
+                // 填充路径线条 也可以用fill填充区域
+                ctx.stroke();
+            },
+            // 画三角形
+            triangle(ctx, style) {
+                ctx.beginPath();
+                ctx.strokeStyle = '#fff';
+                // 保存当前颜色到栈中
+                ctx.save();
+                ctx.moveTo(50, 50);
+                ctx.strokeStyle = 'pink';
+                ctx.lineTo(200, 50);
+                // 取出之前保存的颜色
+                ctx.restore();
+                ctx.lineTo(200, 200);
+                // 设置线条的宽度 只能是正值默认为1.0
+                ctx.lineWidth = 10;
+                // 必须有 否则起点不会和重点链接
+                ctx.closePath();
+                ctx.stroke();
+                // 判断绘制线条还是填充区域
+                // this.changeStyle(ctx, style);
+            },
+            // arc画圆弧
+            circular1(ctx, style) {
+                ctx.beginPath();
+                // 绘制圆弧   arc(x, y, r, startAngle, endAngle, anticlockwise)  anticlockwise:boolean(false顺时针/true逆时针)
+                ctx.arc(50, 50, 40, 0, Math.PI / 2, false);
+                ctx.closePath();
+                this.changeStyle(ctx, style);
+            },
+            // arcTo画圆弧
+            circular2(ctx, style) {
+                ctx.beginPath();
+                ctx.moveTo(50, 50);
+                // arcTo(x1, y1, x2, y2, radius) 创建2切线之间弧线/曲线
+                ctx.arcTo(200, 50, 200, 200, 100);
+                ctx.lineTo(200, 200);
+                ctx.closePath();
+                this.changeStyle(ctx, style);
+            },
+            // 画虚线
+            dl(ctx) {
+                ctx.beginPath();
+                ctx.moveTo(50, 50);
+                ctx.lineTo(250, 50);
+                // 设置虚线样式  setLineDash([实线长度，间隙长度])
+                ctx.setLineDash([20, 5]);
+                // 设置起始的偏移量偏移量
+                ctx.lineDashOffset = 0;
+                ctx.stroke();
+            },
+            // 绘制文本
+            text(ctx, str) {
+                // 设置字体样式:大小、字体风格
+                ctx.font = '100px sans-serif';
+                /**
+                 * 添加其他样式
+                 * textAlign=start(默认)/end/left/right/center
+                 * direction(文本方向)=ltr, rtl, inherit(默认)
+                 * textBaseline (文本基线)=top, hanging, middle, alphabetic(默认值), ideographic, bottom
+                 */
+                // 绘制文本 fillText(文本，x,y)
+                // ctx.fillText(str, 10, 100);
+                ctx.restore();
+                ctx.strokeText(str, 10, 100);
+
+            }
+        }
+        let can = document.querySelector('#can');
+        let ctx = can.getContext('2d');
+
+        // draw.line(ctx);
+        // draw.dl(ctx);
+        // draw.text(ctx, '测试');
+        draw.triangle(ctx, 'stroke');
+        // draw.circular1(ctx, 'stroke');
+        // draw.circular2(ctx, 'fill');
+    </script>
+</body>
+
+</html>
