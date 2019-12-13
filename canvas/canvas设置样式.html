@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #can {
+            background-color: lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="can" width="300" height="300"></canvas>
+    <script>
+        /** @type {HTMLCanvasElement} */
+        let can = document.querySelector('#can');
+        let ctx = can.getContext('2d');
+        let draw = {
+            // 画矩形
+            rect() {
+                ctx.beginPath();
+                // rect(x,y,w,h)
+                ctx.rect(30, 30, 200, 200);
+                ctx.lineWidth = 5;
+                ctx.strokeStyle = '#fff';
+                // 设置阴影大小
+                ctx.shadowBlur = 20;
+                // 设置阴影颜色
+                ctx.shadowColor = '#000';
+                ctx.closePath();
+                // 画三角形
+                ctx.stroke();
+            },
+            triangle() {
+                ctx.beginPath();
+                ctx.moveTo(50, 50);
+                ctx.lineTo(50, 150);
+                ctx.lineTo(150, 150);
+                ctx.fillStyle = '#fff';
+                // 设置线性渐变位置 createLinearGradient(x0,y0,x1,y1) 
+                let color = ctx.createLinearGradient(50, 50, 150, 150);
+                // 添加渐变起始色  addColorStop(0.0-1.0之间,颜色)
+                color.addColorStop(0, '#fff');
+                // 添加渐变结束色
+                color.addColorStop(1, '#000');
+                ctx.fillStyle = color;
+                // 填充:关闭路径可有可无
+                ctx.closePath();
+                ctx.fill();
+            },
+            // 画圆
+            cir() {
+                ctx.beginPath();
+                ctx.arc(100, 100, 50, 0, 2 * Math.PI, false);
+                ctx.closePath();
+                //设置放射性渐变 createRadialGradient(x0,y0,r0,x1,y1,r1)
+                let color = ctx.createRadialGradient(100, 100, 50, 50, 1 * Math.PI, 100, 100, 2 * Math.PI);
+                color.addColorStop(0, '#fff');
+                color.addColorStop(1, '#000');
+                ctx.fillStyle = color;
+                ctx.fill();
+            }
+        }
+        // 测试
+        // draw.rect();
+        // draw.triangle();
+        draw.cir();
+    </script>
+</body>
+
+</html>
