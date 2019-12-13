@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box"></div>
+    <script>
+        let box = document.querySelector('#box');
+        let body = document.querySelector('body');
+        // 保存鼠标在box内部点击的位置
+        let targetx = 0,
+            targety = 0;
+        // 改变box的位置
+        let myFunction = function (e) {
+            // 获取鼠标移动的位置
+            let x = e.clientX;
+            let y = e.clientY;
+            // 做差是为了保证在移动box的时候 鼠标不会跑到左上角
+            box.style.left = `${x-targetx}px`;
+            box.style.top = `${y-targety}px`;
+        }
+        // 点击top的时候才可以移动
+        box.onmousedown = function (e) {
+            // 获取鼠标在box内部点击的位置
+            targetx = e.offsetX;
+            targety = e.offsetY;
+            body.addEventListener("mousemove", myFunction);
+        };
+        // 任何位置松开鼠标按键移除事件
+        body.onmouseup = function () {
+            body.removeEventListener("mousemove", myFunction);
+        }
+    </script>
+</body>
+
+</html>
