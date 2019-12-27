@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .main {
+            background-color: lightgreen;
+        }
+    </style>
+
+</head>
+
+<body>
+    <canvas id="main" class="main"></canvas>
+    <div class="tool">
+        <div class="style">1</div>
+        <div class="color">1</div>
+    </div>
+
+    <script>
+        /** @type {HTMLCanvasElement} */
+        let main = document.querySelector('#main');
+        let ctx = main.getContext('2d');
+        let init = function () {
+            let width = document.documentElement.clientWidth;
+            let height = document.documentElement.clientHeight;
+            main.width = width * 0.8;
+            main.height = height;
+            console.log(`width=${width},heigh=${height}`);
+        }
+        init();
+        window.onresize = function () {
+            init();
+        }
+
+
+        // 绘画
+        let line = function (e) {
+            ctx.lineTo(e.clientX, e.clientY);
+            ctx.stroke();
+        };
+        // 按下鼠标
+        main.onmousedown = function (e) {
+            ctx.moveTo(e.clientX, e.clientY);
+            // 移动画笔
+            main.addEventListener('mousemove', line);
+        }
+        // 松开鼠标
+        main.onmouseup = function () {
+            // 停止画笔
+            main.removeEventListener('mousemove', line);
+        }
+    </script>
+</body>
+
+</html>
