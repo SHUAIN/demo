@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let containsDuplicate = function (nums) {
+            let recode = false;
+            for (let i = 0; i < nums.length; i++) {
+                for (let j = i + 1; j <= nums.length - 1; j++) {
+                    if (nums[i] == nums[j]) {
+                        recode = true;
+                        break;
+                    }
+                }
+            }
+            if (recode) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        let arr = [1, 1, 1, 3, 3, 4, 3, 2, 4, 2];
+        let res = containsDuplicate(arr);
+        console.log(res)
+    </script>
+</body>
+
+</html>

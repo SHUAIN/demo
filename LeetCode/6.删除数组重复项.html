@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 传入一个数组，去除重复元素后，返回新长度
+        // [1,1,2,2,3]->[1,2,3]  长度:3
+        // 思路:双指针
+        // 时间复杂度O(n)
+        var rd = function (nums) {
+            let l = 0,
+                r = 1;
+            while (r < nums.length) {
+                if (nums[l] != nums[r]) {
+                    console.log(r-l);
+                    nums[l + 1] = nums[r];
+                    l += 1;
+                }
+                r++;
+            }
+            nums.length = l + 1;
+            return l + 1;
+        }
+        // 优化 当数组都是不重复元素时，不进行复制
+        let rd2 = function (nums) {
+            let l = 0,
+                r = 1;
+            while (r < nums.length) {
+                if (nums[l] != nums[r]) {
+                    if (r-l>1) {
+                        nums[l + 1] = nums[r];
+                    }
+                    l += 1;
+                }
+                r++;
+            }
+            nums.length = l + 1;
+            return l + 1;
+        }
+        console.log(rd([1,1,1, 2, 3]));
+    </script>
+</body>
+
+</html>

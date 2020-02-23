@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 旋转数组
+        /*
+            输入: [1,2,3,4,5,6,7] 和 k = 3
+            输出: [5,6,7,1,2,3,4]
+            解释:
+            向右旋转 1 步: [7,1,2,3,4,5,6]
+            向右旋转 2 步: [6,7,1,2,3,4,5]
+            向右旋转 3 步: [5,6,7,1,2,3,4]
+        */
+        let arr = [1, 2, 3];
+        let rotate = function (nums, k) {
+            let len = nums.length;
+            let index = 0;
+            while (index < k) {
+                let temp = nums[len - 1];
+                for (let i = len - 1; i > 0; i--) {
+                    nums[i] = nums[i - 1];
+                }
+                nums[0] = temp;
+                index++;
+            }
+            console.log(nums);
+        };
+        rotate(arr, 2);
+        // 翻转数组
+        let reverse = function (arr) {
+            let temp = 0,
+                len = arr.length;
+            for (let i = 0; i < parseInt(len / 2); i++) {
+                temp = arr[(len - 1) - i];
+                arr[(len - 1) - i] = arr[i];
+                arr[i] = temp;
+            }
+            console.log(arr);
+        }
+    </script>
+</body>
+
+</html>

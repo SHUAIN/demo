@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [1, 4, 2, 1, 2];
+        // O(n)  使用额外空间
+        let singleNumberOne = function (nums) {
+            let item = 0;
+            let obj = {};
+            for (let i = 0; i < nums.length; i++) {
+                if (obj[nums[i]] == undefined) {
+                    obj[nums[i]] = 0;
+                } else {
+                    obj[nums[i]] += 1;
+                }
+            }
+            for (let i in obj) {
+                if (obj[i] == 0) {
+                    item = i;
+                    break;
+                }
+            }
+            return item;
+        }
+        let res = singleNumberOne(arr);
+        console.warn(res)
+        console.log(5 & 2);
+    </script>
+</body>
+
+</html>
