@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+                提取url主机地址后的携带的参数
+        */
+        // let urlStr = 'http://www.inode.club?name=koala&study=js&study=node&study=vue';
+        let urlStr = 'http://www.inode.club?name=koala&study=js&other=demo&other=test';
+        let queryString = (urlStr) => {
+            // 存储返回数据
+            let obj = {};
+            // 提取参数
+            let str = urlStr.slice(urlStr.indexOf('?') + 1, urlStr.length);
+            // 分隔
+            let arr = str.split('&');
+            // 对分隔的数据进行存储
+            arr.forEach(e => {
+                if (obj[e.split('=')[0]] == undefined) {
+                    obj[e.split('=')[0]] = [];
+                    obj[e.split('=')[0]].push(e.split('=')[1]);
+                } else {
+                    obj[e.split('=')[0]].push(e.split('=')[1]);
+                };
+            });
+            for (let i in obj) {
+                if (Array.isArray(obj[i]) && obj[i].length == 1) {
+                    obj[i] = obj[i][0];
+                }
+            }
+            return obj;
+        }
+        let res = queryString(urlStr);
+        console.log(res)
+    </script>
+</body>
+
+</html>
