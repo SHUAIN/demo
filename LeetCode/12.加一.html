@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 输入 [1,2,3]->[1,2,4]
+        // 特殊 [9]->[1,0]
+        let plusOne = (digits) => {
+            let arr = [];
+            let num = 1,
+                index = digits.length - 1;
+            while (index >= 0) {
+                if (num != 0) {
+                    digits[index] += num;
+                    if (digits[index] >= 10) {
+                        num = parseInt(digits[index] / 10);
+                        digits[index] = digits[index] % 10;
+                    } else {
+                        num = 0;
+                    }
+                }
+                arr.unshift(digits[index]);
+                index--;
+            }
+            if (num != 0) {
+                arr.unshift(num);
+            }
+            return arr;
+        };
+        let res = plusOne([9]);
+        console.log(res)
+    </script>
+</body>
+
+</html>
