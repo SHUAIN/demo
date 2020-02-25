@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 外观数列  [1->11->21->1211->111221->312211..] 第n行的数是多少
+        let get = (str) => {
+            let target = '',
+                index = 1;
+            // 根据上一行求出当前行数据
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] == str[i + 1]) {
+                    index++
+                } else {
+                    target += index
+                    target += str[i]
+                    index = 1;
+                }
+            }
+            return target
+        }
+        let countAndSay = (n) => {
+            let res = '1'
+            for (let i = 0; i < n - 1; i++) {
+                res = get(res)
+            }
+            return res;
+        }
+        countAndSay(6)
+    </script>
+</body>
+
+</html>

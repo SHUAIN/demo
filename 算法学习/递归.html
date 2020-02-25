@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 递归求1-n的 和差商积
+        let sum = (n) => {
+            if (n == 1) {
+                return 1;
+            } else {
+                return n + sum(n - 1)
+            }
+        }
+        console.log(sum(100))
+        //  求数列[1,1,2,3...]中第index项是多少
+        let calNum = (index) => {
+            if (index == 1 || index == 2) {
+                return 1
+            } else {
+                return calNum(index - 1) + calNum(index - 2)
+            }
+        }
+    </script>
+</body>
+
+</html>
