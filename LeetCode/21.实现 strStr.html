@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var strStr = function (haystack, needle) {
+            let num = -1
+            // 处理特殊情况
+            if (needle.length == 0 || haystack === needle) {
+                return 0
+            } else {
+                let obj = {},
+                    index = 1;
+                // 保存目标字符串首位出现位置
+                for (let i = 0; i < haystack.length; i++) {
+                    if (haystack[i] == needle[0]) {
+                        obj[index] = i;
+                        index++;
+                    }
+                }
+                for (let key in obj) {
+                    // 截取片段字符串进行比较
+                    let res = haystack.slice(obj[key], obj[key] + needle.length);
+                    if (res == needle) {
+                        num = obj[key]
+                        break;
+                    }
+                }
+                return num
+            }
+        };
+        let res = strStr("aaa", "a")
+        console.log(res)
+    </script>
+</body>
+
+</html>

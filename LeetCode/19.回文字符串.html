@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 忽略大小写/空格/标点符号
+        let format = (str) => {
+            let s = '';
+            // Unicode编码
+            let numL = 48,
+                numR = 57,
+                bLetterL = 65,
+                bLetterR = 90,
+                sLetterL = 97,
+                sLetterR = 122;
+            for (let i = 0; i < str.length; i++) {
+                let item = str[i].charCodeAt();
+                if (item >= numL && item <= numR || item >= bLetterL && item <= bLetterR || item >= sLetterL &&
+                    item <= sLetterR) {
+                    s += str[i].toLowerCase();
+                }
+            }
+            console.log(s);
+            return s
+        }
+        // 判断是否是回文
+        let isPalindrome = (s) => {
+            let res = false;
+            let str = format(s);
+            if (str.length == 1 || str.length == 0) {
+                res = true;
+            } else {
+                for (let i = 0; i < parseInt(str.length / 2); i++) {
+                    if (str[i] == str[str.length - 1 - i]) {
+                        res = true;
+                    } else {
+                        res = false;
+                        break;
+                    }
+                }
+            }
+            return res;
+        }
+        let res = isPalindrome("`l;`` 1o1 ??;l`");
+        console.log(res)
+    </script>
+</body>
+
+</html>

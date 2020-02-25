@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var firstUniqChar = function (s) {
+            let index = s.length + 1;
+            let obj = {};
+            for (let i = 0; i < s.length; i++) {
+                if (obj[s[i]] == undefined) {
+                    obj[s[i]] = i;
+                } else {
+                    obj[s[i]] = -1;
+                }
+            }
+            for (let i in obj) {
+                if (obj[i] != -1) {
+                    if (index > obj[i]) {
+                        index = obj[i]
+                    }
+                }
+            }
+            return index == s.length + 1 ? -1 : index;
+        };
+        console.log(res)
+    </script>
+</body>
+
+</html>

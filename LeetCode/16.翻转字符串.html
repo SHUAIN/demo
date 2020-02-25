@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let strs = ['w', 'a', 'd', 'e'];
+        var reverseString = function (s) {
+            for (let i = 0; i < parseInt(s.length / 2); i++) {
+                // ES6解构赋值
+                [s[i], s[s.length - 1 - i]] = [s[s.length - 1 - i], s[i]];
+            }
+            console.log(s)
+        };
+        reverseString(strs);
+    </script>
+</body>
+
+</html>

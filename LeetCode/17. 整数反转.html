@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var reverse = function (x) {
+            // 判边界
+            let left = Math.pow(-2, 31),
+                right = Math.pow(2, 31) - 1;
+            if (x != 0 && x >= Math.pow(-2, 31) && x <= Math.pow(2, 31) - 1) {
+                let nums = String(x).split('');
+                let num = '';
+                if (isNaN(Number(nums[0]))) {
+                    console.log('有符号')
+                    num = nums[0];
+                    nums.shift();
+                }
+                nums.reverse();
+                for (let i = 0; i < nums.length; i++) {
+                    num += nums[i];
+                }
+                if (num >= left && num <= right) {
+                    return parseInt(num)
+                } else {
+                    return 0
+                }
+            } else {
+                return x;
+            }
+        };
+        let res = reverse(1534236469);
+        console.log(res)
+    </script>
+</body>
+
+</html>
