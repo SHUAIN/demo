@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var longestCommonPrefix = function (strs) {
+            let str = '';
+            if (strs.length == '') {
+                return str
+            } else if (strs.length == 1) {
+                return strs[0]
+            } else {
+                for (let i = 0; i < strs[0].length; i++) {
+                    for (j = 1; j < strs.length; j++) {
+                        if (strs[j][i] != strs[0][i]) {
+                            return str
+                        }
+                    }
+                    str += strs[0][i]
+                }
+                console.log(str);
+                return str
+            }
+        };
+        longestCommonPrefix(["asdsasdaa", "aa", 'aa'])
+    </script>
+</body>
+
+</html>
