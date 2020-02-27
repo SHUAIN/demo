@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //  node:{
+        //      val:val,
+        //      next:node
+        // }
+        var deleteNode = function (node) {
+            node.val = node.next.val
+            node.next = node.next.next
+        };
+    </script>
+</body>
+
+</html>

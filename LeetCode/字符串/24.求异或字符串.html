@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * @param {string} s
+         * @param {string} t
+         * @return {boolean}
+         */
+        let saveE = (obj, str) => {
+            for (let i = 0; i < str.length; i++) {
+                if (obj[str[i]] == undefined) {
+                    obj[str[i]] = 1
+                } else {
+                    obj[str[i]]++
+                }
+            }
+        }
+        var isAnagram = function (s, t) {
+            if (s.length != t.length) {
+                return false
+            } else {
+                let obj = {},
+                    obj2 = {},
+                    index = 0,
+                    len = 0
+                // 保存每个字符
+                saveE(obj, s);
+                saveE(obj2, t);
+                // 对比保存的字符
+                for (let key in obj) {
+                    len++
+                    if (obj2[key] == undefined || obj[key] != obj2[key]) {
+                        return false
+                    } else {
+                        index++
+                    }
+                }
+                if (index == len) {
+                    return true
+                } else {
+                    return false
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>
