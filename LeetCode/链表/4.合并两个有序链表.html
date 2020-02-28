@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 合并两个有序链表
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val) {
+         *     this.val = val;
+         *     this.next = null;
+         * }
+         */
+        /**
+         * @param {ListNode} l1
+         * @param {ListNode} l2
+         * @return {ListNode}
+         */
+        // 存取所有节点
+        let saveNode = (arr, node) => {
+            while (node != null) {
+                arr.push(node)
+                node = node.next
+            }
+        }
+        // 对节点进行排序
+        let sort = (arr) => {
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = i + 1; j < arr.length; j++) {
+                    if (arr[i].val > arr[j].val) {
+                        [arr[i], arr[j]] = [arr[j], arr[i]]
+                    }
+                }
+            }
+        }
+        var mergeTwoLists = function (l1, l2) {
+            let arr = []
+            saveNode(arr, l1)
+            saveNode(arr, l2)
+            if (arr.length == 0) {
+                return null
+            } else {
+                if (arr.length != 1) {
+                    sort(arr)
+                    for (let i = 0; i < arr.length; i++) {
+                        arr[i].next = arr[i + 1]
+                    }
+                }
+                return arr[0]
+            }
+        };
+    </script>
+</body>
+
+</html>

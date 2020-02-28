@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var target = [0, 1, null, [1, 2], {
+            name: 'a'
+        }, function a() {
+            return 1;
+        }];
+        // 完成下⾯的深拷⻉函数
+        function deepCopy(src) {
+            let dest = [];
+            src.forEach(e => {
+                let type = typeof e;
+                console.log(type);
+                switch (type) {
+                    case 'number':
+                    case 'string':
+                    case 'function':
+                        dest.push(e)
+                        break;
+                    case 'object':
+                        if (e == null || undefined) {
+                            dest.push(e)
+                        } else if (e instanceof Array) {
+                            let arr = [];
+                            for (let i = 0; i < e.length; i++) {
+                                arr.push(e[i])
+                            }
+                            dest.push(arr)
+                        } else {
+                            let item = JSON.stringify(e)
+                            dest.push(JSON.parse(item))
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            })
+            return dest;
+        }
+        let res = deepCopy(target)
+        target[0] = 100
+        target[4].name = 'demo'
+        target[3][0] = 1000
+        console.log(target)
+        console.log(res);
+    </script>
+</body>
+
+</html>

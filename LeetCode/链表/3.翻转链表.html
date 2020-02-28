@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let saveNode = (arr, head) => {
+            arr.push(head)
+            while (head.next != null) {
+                head = head.next
+                arr.push(head)
+            }
+        }
+        var reverseList = function (head) {
+            let arr = []
+            if (head == null) {
+                return null
+            } else {
+                saveNode(arr, head)
+                for (let i = arr.length - 1; i > 0; i--) {
+                    arr[i].next = arr[i - 1];
+                }
+                arr[0].next = null
+                return arr[arr.length - 1]
+            }
+        };
+    </script>
+</body>
+
+</html>
