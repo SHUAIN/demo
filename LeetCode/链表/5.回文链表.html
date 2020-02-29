@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /**
+         * Definition for singly-linked list.
+         * function ListNode(val) {
+         *     this.val = val;
+         *     this.next = null;
+         * }
+         */
+        /**
+         * @param {ListNode} head
+         * @return {boolean}
+         */
+        let saveNode = (arr, node) => {
+            while (node != null) {
+                arr.push(node)
+                node = node.next
+            }
+        }
+        var isPalindrome = function (head) {
+            let arr = [],
+                res = false
+            saveNode(arr, head)
+            // 判断极端情况
+            if (arr.length == 0 || arr.length == 1) {
+                return true
+            } else {
+                for (let i = 0; i < parseInt(arr.length / 2); i++) {
+                    let diff = arr[i].val == arr[arr.length - i - 1].val
+                    if (diff) {
+                        res = true
+                    } else {
+                        res = false
+                        break
+                    }
+                }
+                return res
+            }
+        };
+    </script>
+</body>
+
+</html>
