@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let init = (arr, total) => {
+            for (let i = 0; i < total; i++) {
+                arr.push(i)
+            }
+        }
+        let find = (arr, num) => {
+            let index = -1
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] == num) {
+                    index = i
+                    break
+                }
+            }
+            console.log(`index=${index}`);
+            return index
+        }
+        let binary = (find, arr, low, high) => {
+            if (low <= high) {
+                // 左边界等于目标值 
+                if (arr[low] == find) {
+                    return low;
+                }
+                // 右边界等于目标值
+                if (arr[high] == find) {
+                    return high;
+                }
+                // 中间值
+                var mid = Math.ceil((high + low) / 2);
+
+                if (arr[mid] == find) {
+                    // 中间值等于目标值
+                    return mid;
+                } else if (arr[mid] > find) {
+                    // 中间值大于目标值
+                    return binary(find, arr, low, mid - 1);
+                } else {
+                    // 中间值小于目标值
+                    return binary(find, arr, mid + 1, high);
+                }
+            }
+            return -1;
+        }
+        let arr = []
+        init(arr, 99999999)
+        console.warn('暴力查找');
+        console.time('forceSearch')
+        find(arr, 333333)
+        console.timeEnd('forceSearch')
+
+        console.warn('二分查找');
+        console.time('binarySearch')
+        binary(333333, arr, 0, arr.length)
+        console.timeEnd('binarySearch')
+    </script>
+</body>
+
+</html>
