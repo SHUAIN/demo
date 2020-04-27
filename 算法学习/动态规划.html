@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //买卖股票的最佳时机
+        var maxProfit = function (prices) {
+            // 暴力破解：时间复杂度n2，空间复杂度1
+            // 22对比去求最大的差值
+            let max = 0
+            for (let i = 0; i <= prices.length - 2; i++) {
+                for (let j = i + 1; j < prices.length; j++) {
+                    if (prices[j] - prices[i] > max) {
+                        max = prices[j] - prices[i]
+                    }
+                }
+            }
+            return max
+        };
+        var maxProfit2 = function (prices) {
+            // 一次for循环 
+            // 循环中去找最小值 紧接着对比和最小值的差值
+            // 时间复杂度：n，空间复杂度1
+            let minVal = 999999999
+            let max = 0
+            for (let i = 0; i < prices.length; i++) {
+                // 查看当前值是不是最小值
+                if (prices[i] < minVal) {
+                    minVal = prices[i]
+                }
+                // 对比差值
+                if (prices[i] - minVal > max) {
+                    max = prices[i] - minVal
+                }
+            }
+            return max
+        }
+        // 最大自序和
+        let maxSubArray = function (nums) {
+            let ans = nums[0];
+            let sum = 0;
+            for (const i in nums) {
+                if (sum > 0) {
+                    sum += nums[i];
+                } else {
+                    sum = nums[i];
+                }
+                ans = Math.max(ans, sum);
+            }
+            return ans;
+        }
+        // 
+        var rob = function (nums) {
+            
+        };
+        console.log(rob([2, 7, 9, 3, 1]))
+    </script>
+</body>
+
+</html>

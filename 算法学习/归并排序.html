@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>步骤</li>
+        <li>分解原问题(分解数组为[1,n/2][n/2+1,n])</li>
+        <li>解决子问题(递归求解)</li>
+        <li>合并问题(合并排序)</li>
+    </ul>
+    <script>
+        let arr = [100, 22, 03, 231, 2, 34, 55, 543, 345];
+
+        let merge = (left, right) => {
+            var result = [];
+            while (left.length > 0 && right.length > 0) {
+                if (left[0] < right[0]) {
+                    /*shift()方法用于把数组的第一个元素从其中删除，并返回第一个元素的值。*/
+                    result.push(left.shift());
+                } else {
+                    result.push(right.shift());
+                }
+            }
+            return result.concat(left).concat(right);
+        }
+        // 递归
+        let mergeSort = (items) => {
+            if (items.length == 1) {
+                return items;
+            }
+            // 切分数组
+            var middle = Math.floor(items.length / 2),
+                left = items.slice(0, middle),
+                right = items.slice(middle);
+            // 合并
+            return merge(mergeSort(left), mergeSort(right));
+        }
+        let res = mergeSort(arr)
+        console.log(res);
+    </script>
+</body>
+
+</html>

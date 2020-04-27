@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.11/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                name: 'vue'
+            },
+        })
+        let one = (a, b) => {
+            console.log(a + b)
+        }
+        let two = (a) => {
+            console.log(a)
+        }
+        app.$on('one', one)
+        app.$on('one', two)
+        app.$off('one', one, two)
+        app.$emit('one', 1)
+    </script>
+</body>
+
+</html>

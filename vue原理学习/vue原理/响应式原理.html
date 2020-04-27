@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>观察者模式</title>
+</head>
+
+<body>
+    <div>
+        大家好，我叫<span id="name"></span>，是一个<span id="sex"></span>
+    </div>
+    <div>
+        <input type="text" name="name">
+        <input type="text" name="sex">
+        <button id="enter">修改</button>
+    </div>
+    <script>
+        let sx = {
+            // 带_的属性，代表不对外开放访问的属性
+            _name: "",
+            _sex: ""
+        }
+        // 1.对所有属性进行遍历，一一拦截
+        for (let key in sx) {
+            // 截取字符串
+            let attr = key.slice(key.indexOf('_') + 1, key.length)
+            console.log(attr);
+            Object.defineProperty(sx, attr, {
+                get() {
+                    return this[`_${attr}`]
+                },
+                set(r) {
+                    this[`_${attr}`] = r
+                    render()
+                }
+            })
+        }
+        let update = (name = 'shuaxin', sex = '男生') => {
+            sx.name = name
+            sx.sex = sex
+        }
+        let render = () => {
+            let name = document.querySelector('#name')
+            let sex = document.querySelector('#sex')
+            name.textContent = sx.name
+            sex.textContent = sx.sex
+        }
+        let init = () => {
+            update()
+            render()
+        }
+        init()
+        let enter = document.querySelector('#enter')
+        enter.addEventListener('click', () => {
+            update(document.getElementsByName('name')[0].value, document.getElementsByName('sex')[0].value)
+        })
+        let str = '_name'
+    </script>
+</body>
+
+</html>

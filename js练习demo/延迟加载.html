@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .box>div {
+            width: 100vw;
+            height: 100vh;
+            margin: 0 auto;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .two,
+        .three {
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <div class="one">
+            <img src="./img/a.jpg" alt="">
+        </div>
+        <div class="two">
+            <img src="" data-src="./img/b.jpg" alt="">
+        </div>
+        <div class="three">
+            <img src="" data-src="./img/c.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        let box = document.querySelector('#box')
+        box.addEventListener('mousewheel', () => {
+            if (document.documentElement.scrollTop > 10) {
+                document.querySelector('.two').style.visibility = 'visible'
+                document.querySelector('.two').style.opacity = '1'
+                document.querySelector('.two img').src = document.querySelector('.two img').getAttribute(
+                    'data-src')
+            }
+            if (document.documentElement.scrollTop > 722) {
+                document.querySelector('.three').style.visibility = 'visible'
+                document.querySelector('.three').style.opacity = '1'
+                document.querySelector('.three img').src = document.querySelector('.three img').getAttribute(
+                    'data-src')
+            }
+        })
+    </script>
+</body>
+
+</html>
