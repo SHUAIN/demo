@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 所有不是a的元素 */
+    :not(a) {
+      color: red;
+    }
+
+    /* 任何被disabled禁用的元素 */
+    :disabled {
+      width: 200px;
+    }
+
+    p:nth-child(1) {
+      /* 脱离文档流 */
+      display: none;
+    }
+
+    p:nth-child(2) {
+      /* 不脱离文档流 降低透明度到0 */
+      opacity: 0;
+    }
+
+    p:nth-child(3) {
+      /* 不脱离文档流 隐藏dom显示*/
+      visibility: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <p>1</p>
+  <p>2</p>
+  <p>3</p>
+  <a href="#">link</a>
+  <input type="text" disabled>
+  <ul id="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  <script>
+    // 打印点击li的编号
+    let lis = document.querySelectorAll('#list li')
+    document.querySelector('#list').addEventListener('click', (e) => {
+      console.log([...lis].indexOf(e.target))
+    })
+    // 打印对应字符串的次数
+    String.prototype.repeatify = function (num) {
+      if (typeof num !== 'number') {
+        console.error('num必须是数字')
+        return false
+      }
+      let res = '',
+        index = 0
+      while (index < num) {
+        res += this
+        index++
+      }
+      return res
+    }
+    console.log("vue".repeatify(3)) //vuevuevue
+    // 字符串形式打印传递参数的类型
+    const getArgType = (arg) => {
+      let type = typeof arg
+      if (type === 'object') {
+        return Object.prototype.toString.call(arg)
+      }
+      return type
+    }
+    console.log(getArgType(new Date()))
+    console.log(1, new Number(1))
+    console.log(typeof 1, typeof new Number(1))
+  </script>
+</body>
+
+</html>

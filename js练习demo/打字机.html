@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="show"></div>
+  <script>
+    const show = document.querySelector('#show')
+    let timer = null
+
+
+
+    function write(str, time, options) {
+      let index = 0
+      const {
+        type
+      } = options
+      // 添加文本
+      function addText(str) {
+        show.textContent += str[index]
+        index++
+      }
+      // 添加html
+      function addHtml(str) {
+
+        index++
+      }
+      return setInterval(() => {
+        if (index < str.length) {
+          type === 'textContent' ? addText(str) : addHtml(str)
+        } else {
+          clearInterval(timer)
+        }
+      }, time);
+    }
+    time = write("Hello Word", 100, {
+      type: "innerHTML"
+    })
+  </script>
+</body>
+
+</html>
